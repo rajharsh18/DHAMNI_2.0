@@ -1,0 +1,98 @@
+CREATE DATABASE Dhamni;
+
+USE Dhamni;
+
+
+CREATE TABLE PATH_LAB (
+Reg_no varchar(20) not null,
+User_Id varchar(20) unique,
+Name varchar(30) not null,
+Address Varchar(50) not null,
+Pincode int(6) not null,
+State varchar(50) not null,
+Contact_Number varchar(11) not null,
+Email varchar(50),
+CONSTRAINT pk_path_lab primary key (Reg_No));
+
+
+CREATE TABLE DONOR (
+Fname     varchar(15) not null, 
+Mname     varchar(15),
+Lname     varchar(15),
+Unique_id varchar(20) not null, 
+Bdate     date not null,
+Sex char(1) not null,
+Contact_Number varchar(11) not null,
+Email varchar(50),
+Address   varchar(50) not null,
+Pincode int(6) not null,
+State varchar(50) not null,
+Blood_group varchar(4),
+Weight int(3),
+Iron_content varchar(10),
+High_blood_pressure varchar(10),
+Low_blood_pressure varchar(10),
+Haemoglobin varchar(10),
+CONSTRAINT pk_donor primary key (unique_id));
+
+
+CREATE TABLE BLOOD_BANK (
+Reg_no varchar(20) not null,
+User_Id varchar(20) unique,
+Name varchar(30) not null,
+Address Varchar(50) not null,
+Pincode int(6) not null,
+State varchar(50) not null,
+Contact_Number varchar(11) not null,
+Email varchar(50),
+CONSTRAINT pk_blood_bank primary key (Reg_No));
+
+
+CREATE TABLE RECIPIENT (
+Fname varchar(15) not null, 
+Mname varchar(15),
+Lname varchar(15),
+Unique_id varchar(20) not null, 
+Bdate date not null,
+Sex char(1) not null,
+Contact_Number varchar(11) not null,
+Email varchar(50),
+Address varchar(50),
+Pincode int(6) not null,
+State varchar(50) not null,
+CONSTRAINT pk_recipient primary key (unique_id));
+
+
+CREATE TABLE BLOOD (
+Blood_bank_id varchar(20),
+Blood_group varchar(4), 
+Quantity int(8) not null default 0,
+CONSTRAINT pk_blood primary key (Blood_bank_id, Blood_group),
+CONSTRAINT fk_blood foreign key (Blood_bank_id) references BLOOD_BANK(Reg_no));
+
+CREATE TABLE EXAMINES (
+Path_lab_id varchar(20),
+Donor_id varchar(20),
+Date_of_examination date not null,
+CONSTRAINT pk_examines primary key (Path_lab_id, Donor_id),
+CONSTRAINT fk_examines_path_lab foreign key (Path_lab_id) references PATH_LAB(Reg_no),
+CONSTRAINT fk_examines_donor foreign key (Donor_id) references DONOR(Unique_id));
+
+CREATE TABLE BLOOD_DELIVERY (
+Blood_bank_id varchar(20),
+Recipient_id varchar(20),
+Blood_group varchar(4) not null,
+Quantity_supplied int(8) not null default 1,
+CONSTRAINT pk_blood_del primary key (Blood_bank_id, Recipient_id),
+CONSTRAINT fk_blood_del_Blood_bank foreign key (Blood_bank_id) references BLOOD_BANK(Reg_no),
+CONSTRAINT fk_blood_del_recipient foreign key (Recipient_id) references RECIPIENT(Unique_id));
+
+CREATE TABLE DONOR_RECIPIENT(
+Recipient_id varchar(20),
+Donor_id varchar(20),
+CONSTRAINT pk_donor_recipient primary key (Recipient_id, Donor_id),
+CONSTRAINT fk_donor_recipient_recipient foreign key (Recipient_id) references RECIPIENT(Unique_id),
+CONSTRAINT fk_donor_recipient_donor foreign key (Donor_id) references DONOR(Unique_id));
+
+
+

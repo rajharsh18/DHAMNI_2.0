@@ -105,14 +105,14 @@ if(isset($_POST['req_blood_group'])){
                 // output data of each row
                 echo "<table border='1'>
                       <tr>
-                      <th>Fname</th>
+                      <th>Name</th>
                       <th>Sex</th>
                       <th>Contact_Number</th>
                       <th>Email</th>
                       </tr>";
                       while($row = mysqli_fetch_array($result)){
                           echo "<tr>";
-                          echo "<td>" . $row["Fname"]. " " . $row["Mname"]. " " . $row["Lname"]. "<br>";
+                          echo "<td>" . $row["Fname"]. " " . $row["Mname"]. " " . $row["Lname"]. "</td>";
                           echo "<td>" . $row['Sex'] . "</td>";
                           echo "<td>" . $row['Contact_Number'] . "</td>";
                           echo "<td>" . $row['Email'] . "</td>";

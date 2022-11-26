@@ -6,10 +6,10 @@ if(isset($_POST['req_blood_group'])){
     // Set connection variables
     $server = "localhost";
     $username = "root";
-    $password = "";
+    $pass = "";
 
     // Create a database connection
-    $con = mysqli_connect($server, $username, $password);
+    $con = mysqli_connect($server, $username, $pass);
 
     // Check for connection success
     if(!$con){

@@ -5,10 +5,10 @@ if(isset($_POST['fname'])){
     // Set connection variables
     $server = "localhost";
     $username = "root";
-    $password = "";
+    $pass = "";
 
     // Create a database connection
-    $con = mysqli_connect($server, $username, $password);
+    $con = mysqli_connect($server, $username, $pass);
 
     // Check for connection success
     if(!$con){
@@ -24,27 +24,34 @@ if(isset($_POST['fname'])){
     $bdate = $_POST['bdate'];
     $sex = $_POST['sex'];
     $contact_number = $_POST['contact_number'];
+    $password = $_POST['password'];
     $email = $_POST['email'];
     $address = $_POST['address'];
     $pincode = $_POST['pincode'];
     $state = $_POST['state'];
     
-    $sql = "INSERT INTO `dhamni`.`recipient` (`Fname`, `Mname`, `Lname`, `Unique_id`, `Bdate`, `Sex`, `Contact_Number`, `Email`, `Address`, `Pincode`, `State`) VALUES ('$fname', '$mname', '$lname', '$unique_id', '$bdate', '$sex', '$contact_number', '$email', '$address', '$pincode', '$state');";
+    $sql = "INSERT INTO `dhamni`.`recipient` (`Fname`, `Mname`, `Lname`, `Unique_id`, `Bdate`, `Sex`, `Contact_Number`, `Email`, `Address`, `Pincode`, `State`, `password`) VALUES ('$fname', '$mname', '$lname', '$unique_id', '$bdate', '$sex', '$contact_number', '$email', '$address', '$pincode', '$state','$password');";
     // echo $sql;
 
     // Execute the query
-    if($con->query($sql) == true){
+    if($con->query($sql) == 1){
         // echo "Successfully inserted";
 
         // Flag for successful insertion
-        $insert = true;
+        $insert = 1;
     }
     else{
+        $insert=2;
         echo "ERROR: $sql <br> $con->error";
     }
 
     // Close the database connection
     $con->close();
+
+    if ($insert == 1){
+        header("Location: http://localhost/Dhamni_2.0/recipient_login.php");
+        exit();
+    }
 }
 ?>
 
@@ -70,11 +77,6 @@ if(isset($_POST['fname'])){
             </div>
         </nav>
     </header>
-    <?php
-        if($insert == true){
-        echo "<p class='submitMsg'>Thanks for joining our organisation</p>";
-        }
-    ?>
     <main>
         <form class="row g-3" style="padding: 5%;" action="recipient_register.php" method="post">
 
@@ -88,7 +90,7 @@ if(isset($_POST['fname'])){
             </div>
             <div class="col-md-4">
                 <label for="inputlname" class="form-label">Last Name</label>
-                <input type="text" name="lname" class="form-control" id="inputReg" required>
+                <input type="text" name="lname" class="form-control" id="inputReg">
             </div>
             
             <div class="col-md-4">
@@ -108,11 +110,15 @@ if(isset($_POST['fname'])){
                     <option value="O">Others</option>
                 </select>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="inputContact" class="form-label">Contact Number</label>
                 <input type="number" name="contact_number" class="form-control" id="inputContact" required>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <label for="inputPassword" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="inputPassword" required>
+            </div>
+            <div class="col-md-4">
                 <label for="inputEmail" class="form-label">Email</label>
                 <input type="email" name="email" class="form-control" id="inputEmail">
             </div>
@@ -168,8 +174,13 @@ if(isset($_POST['fname'])){
             </div>
             
             <div class="col-12" style="text-align: center;" >
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
             </div>
+            <div style="text-align: center;">
+        <label class="form-label">Alredy a Member? 
+            <a href="http://localhost/Dhamni_2.0/recipient_login.php">Sign in as a Recipient</a>
+            </label>
+        </div>
         </form>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

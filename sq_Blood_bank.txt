@@ -6,6 +6,7 @@ USE Dhamni;
 CREATE TABLE PATH_LAB (
 Reg_no varchar(20) not null,
 User_Id varchar(20) unique,
+Password varchar(20) not null,
 Name varchar(30) not null,
 Address Varchar(50) not null,
 Pincode int(6) not null,
@@ -39,6 +40,7 @@ CONSTRAINT pk_donor primary key (unique_id));
 CREATE TABLE BLOOD_BANK (
 Reg_no varchar(20) not null,
 User_Id varchar(20) unique,
+Password varchar(20) not null,
 Name varchar(30) not null,
 Address Varchar(50) not null,
 Pincode int(6) not null,
@@ -56,6 +58,7 @@ Unique_id varchar(20) not null,
 Bdate date not null,
 Sex char(1) not null,
 Contact_Number varchar(11) not null,
+Password varchar(20) not null,
 Email varchar(50),
 Address varchar(50),
 Pincode int(6) not null,

@@ -5,10 +5,10 @@ if(isset($_POST['reg_no'])){
     // Set connection variables
     $server = "localhost";
     $username = "root";
-    $password = "";
+    $passord = "";
 
     // Create a database connection
-    $con = mysqli_connect($server, $username, $password);
+    $con = mysqli_connect($server, $username, $pass);
 
     // Check for connection success
     if(!$con){
@@ -160,7 +160,7 @@ if(isset($_POST['reg_no'])){
             <button type="submit" class="btn btn-primary">Sign Up</button>
         </div>
         <div style="text-align: center;">
-        <label class="form-label" for="typePasswordX-2" >Alredy a Member? 
+        <label class="form-label">Alredy a Member? 
             <a href="http://localhost/Dhamni_2.0/blood_bank_login.php">Sign in as a Blood Bank</a>
             </label>
         </div>

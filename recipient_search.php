@@ -2,6 +2,7 @@
 <?php
 $insert= 0;
 $result = 0;
+$result2 = 0;
 if(isset($_POST['quantity_required'])){
     // Set connection variables
     $server = "localhost";
@@ -23,8 +24,8 @@ if(isset($_POST['quantity_required'])){
     $area_pincode= $_POST['area_pincode'];
     $insert = 0;
 
-    // $sql = "SELECT Fname, Mname, Lname, Sex, Contact_Number, Email FROM `dhamni`.`donor` WHERE Blood_group LIKE '$req_blood_group' AND Pincode = '$area_pincode';";
     $sql = "SELECT Fname, Mname, Lname, Sex, Contact_Number, Email FROM `dhamni`.`Donor` WHERE Blood_group LIKE '%$req_blood_group%' AND Pincode = '$area_pincode';";
+    $sql2 = "SELECT Name,contact_number,email from `dhamni`.`blood_bank` as bb, `dhamni`.`blood` as b where bb.Pincode = '$area_pincode' AND b.blood_bank_id = bb.reg_no AND b.blood_group LIKE '%$req_blood_group%' AND b.quantity > 0;";
     // echo $sql;
 
     // Execute the query
@@ -33,6 +34,7 @@ if(isset($_POST['quantity_required'])){
         // Flag for successful insertion
         $insert = 1;
         $result = $con->query($sql);
+        $result2 = $con->query($sql2);
     }
     else{
         $insert=2;
@@ -100,30 +102,45 @@ if(isset($_POST['quantity_required'])){
             </div>
         </form>
         <?php
-        if($insert == 1){
-            if ($insert == 1) {
-                // output data of each row
-                echo "<table border='1'>
-                      <tr>
-                      <th>Name</th>
-                      <th>Sex</th>
-                      <th>Contact_Number</th>
-                      <th>Email</th>
-                      </tr>";
-                      while($row = mysqli_fetch_array($result)){
-                          echo "<tr>";
-                          echo "<td>" . $row["Fname"]. " " . $row["Mname"]. " " . $row["Lname"]. "</td>";
-                          echo "<td>" . $row['Sex'] . "</td>";
-                          echo "<td>" . $row['Contact_Number'] . "</td>";
-                          echo "<td>" . $row['Email'] . "</td>";
-                          echo "</tr>";
-                      }
-                      echo "</table>";
-                    }
-                    else {
-                        echo "$insert";
-                    }
+        if ($insert == 1) {
+            // output data of each row
+            echo "Donors";
+            echo "<table border='1'>
+                  <tr>
+                  <th>Name</th>
+                  <th>Sex</th>
+                  <th>Contact_Number</th>
+                  <th>Email</th>
+                  </tr>";
+                  while($row = mysqli_fetch_array($result)){
+                      echo "<tr>";
+                      echo "<td>" . $row["Fname"]. " " . $row["Mname"]. " " . $row["Lname"]. "</td>";
+                      echo "<td>" . $row['Sex'] . "</td>";
+                      echo "<td>" . $row['Contact_Number'] . "</td>";
+                      echo "<td>" . $row['Email'] . "</td>";
+                      echo "</tr>";
+                  }
+                  echo "</table>";
+            echo "Blood Banks";
+            echo "<table border='1'>
+                <tr>
+                <th>Name</th>
+                <th>Contact_Number</th>
+                <th>Email</th>
+                </tr>";
+                while($row = mysqli_fetch_array($result2)){
+                    echo "<tr>";
+                    echo "<td>" . $row['Name'] . "</td>";
+                    echo "<td>" . $row['contact_number'] . "</td>";
+                    echo "<td>" . $row['email'] . "</td>";
+                    echo "</tr>";
                 }
+                echo "</table>";      
+            }
+            // else {
+            //     echo "$insert";
+            // }
+                
     ?>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

@@ -1,7 +1,7 @@
 
 <?php
 $insert = 0;
-if(isset($_POST['reg_no'])){
+if(isset($_POST['path_lab_id'])){
     // Set connection variables
     $server = "localhost";
     $username = "root";
@@ -17,10 +17,10 @@ if(isset($_POST['reg_no'])){
     // echo "Success connecting to the db";
 
     // Collect post variables
-    $reg_no = $_POST['reg_no'];
-    $blood_group = $_POST['blood_group'];
-    $quantity = $_POST['quantity'];
-    $sql = "UPDATE `dhamni`.`blood` SET `Quantity` = '$quantity' WHERE `Blood_bank_id` LIKE '$reg_no' AND `Blood_group` LIKE '$blood_group';";
+    $path_lab_id = $_POST['path_lab_id'];
+    $donor_id = $_POST['donor_id'];
+    $doe = $_POST['doe'];
+    $sql = "INSERT INTO `dhamni`.`examines` (`Path_lab_id`, `Donor_id`, `Date_of_examination`) VALUES ('$path_lab_id', '$donor_id', '$doe');";
     $insert = 0;
     // echo $sql;
 
@@ -75,30 +75,19 @@ if(isset($_POST['reg_no'])){
         }
     ?>
     <main>
-        <form class="row g-3" style="padding: 5%;" action="blood.php" method="post">
+        <form class="row g-3" style="padding: 5%;" action="examines.php" method="post">
 
             <div class="col-md-4">
-                <label for="inputReg" class="form-label">Registration Number</label>
-                <input type="text" name="reg_no" class="form-control" id="inputReg" required>
+                <label for="inputReg" class="form-label">Path Lab Id</label>
+                <input type="text" name="path_lab_id" class="form-control" id="inputReg" required>
             </div>
             <div class="col-md-4">
-                <label for="inputReq_BG" class="form-label">Required Search Group</label>
-                <select id="inputReq_BG" name="blood_group" class="form-select" required>
-                    <option selected>Required Blood Group</option>
-                    <option value="A +">A +</option>
-                    <option value="A -">A -</option>
-                    <option value="B +">B +</option>
-                    <option value="B -">B -</option>
-                    <option value="O +">O -</option>
-                    <option value="O -">O +</option>
-                    <option value="AB +">AB +</option>
-                    <option value="AB -">AB -</option>
-                    <option value="NULL">Don't Know</option>
-                </select>
+                <label for="inputReg" class="form-label">Donor Id</label>
+                <input type="text" name="donor_id" class="form-control" id="inputReg" required>
             </div>
             <div class="col-md-4">
-                <label for="inputHAddress" class="form-label">Quantity</label>
-                <input type="number" name="quantity" class="form-control" id="inputAddress" required>
+                <label for="inputReg" class="form-label">Date of Examination</label>
+                <input type="date" name="doe" class="form-control" id="inputReg" required>
             </div>
 
             <div class="col-12" style="text-align: center;" >

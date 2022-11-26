@@ -98,6 +98,11 @@ if(isset($_POST['user_id'])){
             <div class="col-12" style="text-align: center;" >
                 <button type="submit" class="btn btn-primary">Login</button>
             </div>
+            <div style="text-align: center;">
+            <label class="form-label">Not Registered? 
+                <a href="http://localhost/Dhamni_2.0/blood_bank_add.php">Register as a Blood Bank</a>
+            </label>
+            </div>
         </form>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

@@ -2,7 +2,7 @@
 <?php
 $insert= 0;
 $result = 0;
-if(isset($_POST['req_blood_group'])){
+if(isset($_POST['quantity_required'])){
     // Set connection variables
     $server = "localhost";
     $username = "root";
@@ -18,8 +18,8 @@ if(isset($_POST['req_blood_group'])){
     // echo "Success connecting to the db";
 
     // Collect post variables
-    $req_blood_group = $_POST['req_blood_group'];
     $quantity_required = $_POST['quantity_required'];
+    $req_blood_group = $_POST['req_blood_group'];
     $area_pincode= $_POST['area_pincode'];
     $insert = 0;
 

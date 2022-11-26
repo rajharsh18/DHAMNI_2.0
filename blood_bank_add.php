@@ -5,7 +5,7 @@ if(isset($_POST['reg_no'])){
     // Set connection variables
     $server = "localhost";
     $username = "root";
-    $passord = "";
+    $pass = "";
 
     // Create a database connection
     $con = mysqli_connect($server, $username, $pass);
@@ -27,12 +27,14 @@ if(isset($_POST['reg_no'])){
     $contact_number = $_POST['contact_number'];
     $email = $_POST['email'];
     $sql = "INSERT INTO `dhamni`.`blood_bank` (`reg_no`, `user_id`, `password`, `name`, `address`, `pincode`,`state`, `contact_number`, `email`) VALUES ('$reg_no', '$user_id', '$password', '$name', '$address', '$pincode','$state' , '$contact_number', '$email')";
+    $sql2 = "INSERT INTO `dhamni`.`blood` (`Blood_bank_id`, `Blood_group`, `Quantity`) VALUES ('$reg_no', 'A +', '0'), ('$reg_no', 'A -', '0'), ('$reg_no', 'B +', '0'), ('$reg_no', 'B -', '0'), ('$reg_no', 'AB +', '0'), ('$reg_no', 'AB -', '0'), ('$reg_no', 'O +', '0'), ('$reg_no', 'O -', '0');";
     // echo $sql;
     // Execute the query
-    if($con->query($sql) == 1){
+    if($con->query($sql) == true){
         // echo "Successfully inserted";
 
         // Flag for successful insertion
+        $result = $con->query($sql2);
         $insert = 1;
     }
     else{

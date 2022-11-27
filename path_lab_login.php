@@ -104,7 +104,7 @@ if(isset($_POST['user_id'])){
             </div>
             <div style="text-align: center;">
             <label class="form-label">Not Registered? 
-                <a href="http://localhost/Dhamni_2.0/path_lab_add.php">Register as a Path Lab</a>
+                <a href="http://localhost/Dhamni_2.0/path_lab_register.php">Register as a Path Lab</a>
             </label>
             </div>
         </form>

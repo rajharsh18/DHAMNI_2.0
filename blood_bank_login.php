@@ -100,7 +100,7 @@ if(isset($_POST['user_id'])){
             </div>
             <div style="text-align: center;">
             <label class="form-label">Not Registered? 
-                <a href="http://localhost/Dhamni_2.0/blood_bank_add.php">Register as a Blood Bank</a>
+                <a href="http://localhost/Dhamni_2.0/blood_bank_register.php">Register as a Blood Bank</a>
             </label>
             </div>
         </form>

@@ -74,7 +74,7 @@ if(isset($_POST['reg_no'])){
         </nav>
     </header>
     <main>
-        <form class="row g-3" style="padding: 5%;" action="path_lab_add.php" method="post">
+        <form class="row g-3" style="padding: 5%;" action="path_lab_register.php" method="post">
             <div class="col-md-6">
                 <label for="inputUserId" class="form-label">User ID</label>
                 <input type="text" name="user_id" class="form-control" id="inputUserId" required>

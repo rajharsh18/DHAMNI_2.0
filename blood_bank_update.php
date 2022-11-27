@@ -27,7 +27,7 @@ if(isset($_POST['reg_no'])){
     $state = $_POST['state'];
     $contact_number = $_POST['contact_number'];
     $email = $_POST['email'];
-    $sql1 = "UPDATE `dhamni`.`path_lab` SET `Name` = '$name', `Address` = '$address', `Pincode` = '$pincode', `Contact_Number` = '$contact_number', `Email` = '$email', `state`='$state' WHERE `Reg_no` = '$reg_no' AND `user_id` = '$user_id' AND `password`='$password';";
+    $sql1 = "UPDATE `dhamni`.`blood_bank` SET `Name` = '$name', `Address` = '$address', `Pincode` = '$pincode', `Contact_Number` = '$contact_number', `Email` = '$email', `state`='$state' WHERE `Reg_no` = '$reg_no' AND `user_id` = '$user_id' AND `password`='$password';";
     $sql = "SELECT password, reg_no FROM `dhamni`.`path_lab` WHERE `user_id` = '$user_id';";
     // echo $sql;
     // Execute the query
@@ -90,7 +90,7 @@ if(isset($_POST['reg_no'])){
     <header>
         <nav class="navbar" style="background-color: #f00000;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/path_lab_update.php" style="color: white; margin: auto; font-size: 1.8em;">
+                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/blood_bank_update.php" style="color: white; margin: auto; font-size: 1.8em;">
                     <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
                     Path-lab Update Form
                 </a>
@@ -119,7 +119,7 @@ if(isset($_POST['reg_no'])){
         
     ?>
     <main>
-        <form class="row g-3" style="padding: 5%;" action="path_lab_update.php" method="post">
+        <form class="row g-3" style="padding: 5%;" action="blood_bank_update.php" method="post">
         <div class="col-md-6">
             <label for="inputUserId" class="form-label">User ID</label>
             <input type="text" name="user_id" class="form-control" id="inputUserId" required>

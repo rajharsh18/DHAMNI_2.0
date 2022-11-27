@@ -59,7 +59,7 @@ if(isset($_POST['reg_no'])){
     <header>
         <nav class="navbar" style="background-color: #f00000;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" style="color: white; margin: auto; font-size: 1.8em;">
+                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/blood.php" style="color: white; margin: auto; font-size: 1.8em;">
                     <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
                     Update Blood Information
                 </a>

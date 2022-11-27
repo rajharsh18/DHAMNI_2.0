@@ -79,21 +79,35 @@ if(isset($_POST['area_pincode'])){
         <?php
         if ($insert == 1) {
             // output data of each row
+            
+            echo "<main style='width: 90%; margin: auto;'>";
             echo "Blood Banks";
-            echo "<table border='1'>
+            echo "<table class='table table-striped' style='border: 1px solid black;' >
+            <thead>
                 <tr>
+                <th>S. No.</th>
                 <th>Name</th>
                 <th>Contact_Number</th>
                 <th>Email</th>
-                </tr>";
+                </tr>
+            </thead>
+            <tbody>";
+            $code = 1;
                 while($row = mysqli_fetch_array($result)){
+
                     echo "<tr>";
+                    echo "<td>$code</td>";
                     echo "<td>" . $row['Name'] . "</td>";
                     echo "<td>" . $row['contact_number'] . "</td>";
                     echo "<td>" . $row['email'] . "</td>";
                     echo "</tr>";
+                    $code = $code + 1;
                 }
-                echo "</table>";      
+
+                echo "
+                </tbody>
+                </table>
+                </main>";      
             }
             // else {
             //     echo "$insert";

@@ -2,52 +2,38 @@
 $insert = 0;
 $flag = 0;
 if (isset($_POST['user_id'])) {
-    // Set connection variables
     $server = "localhost";
     $username = "root";
     $pass = "";
 
-    // Create a database connection
     $con = mysqli_connect($server, $username, $pass);
 
-    // Check for connection success
     if (!$con) {
         die("connection to this database failed due to" . mysqli_connect_error());
     }
-    // echo "Success connecting to the db";
 
-    // Collect post variables
     $user_id = $_POST['user_id'];
     $password = $_POST['password'];
     $sql = "SELECT user_id, password FROM `dhamni`.`path_lab` WHERE user_id = '$user_id';";
-    // echo $sql;
 
-    // Execute the query
     if ($con->query($sql) == true) {
-        // echo "Successfully inserted";
-        // Flag for successful insertion
         $result = $con->query($sql);
         $row = mysqli_fetch_array($result);
-        // $password = $row["password"];
         $insert = 1;
     } else {
         $insert = 2;
         echo "ERROR: $sql <br> $con->error";
     }
-
-    // Close the database connection
     $con->close();
 
     if ($result->num_rows == 0) {
         $flag = 1;
-        // echo "User id Not Exist !!!";
     } else if ($insert == 1) {
         if ($password == $row["password"]) {
             header("Location: http://localhost/Dhamni_2.0/deep/homepl.html");
             exit();
         } else if ($insert == 1 && $password != $row["password"]) {
             $flag = 2;
-            // echo "Wrong Password !!!"; 
         }
     }
 
@@ -71,7 +57,6 @@ if (isset($_POST['user_id'])) {
             <div class="container-fluid">
                 <a class="navbar-brand" href="http://localhost/Dhamni_2.0/path_lab_login.php"
                     style="color: white; margin: auto; font-size: 1.8em;">
-                    <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
                     Path-Lab Login
                 </a>
             </div>

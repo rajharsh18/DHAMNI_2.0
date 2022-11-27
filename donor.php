@@ -2,21 +2,15 @@
 <?php
 $insert = false;
 if(isset($_POST['fname'])){
-    // Set connection variables
     $server = "localhost";
     $username = "root";
     $pass = "";
-
-    // Create a database connection
     $con = mysqli_connect($server, $username, $pass);
 
-    // Check for connection success
     if(!$con){
         die("connection to this database failed due to" . mysqli_connect_error());
     }
-    // echo "Success connecting to the db";
 
-    // Collect post variables
     $fname = $_POST['fname'];
     $mname = $_POST['mname'];
     $lname = $_POST['lname'];
@@ -36,20 +30,14 @@ if(isset($_POST['fname'])){
     $haemoglobin = $_POST['haemoglobin'];
     
     $sql = "INSERT INTO `dhamni`.`donor` (`Fname`, `Mname`, `Lname`, `Unique_id`, `Bdate`, `Sex`, `Contact_Number`, `Email`, `Address`, `Pincode`, `State`, `Blood_group`, `Weight`, `Iron_content`, `High_blood_pressure`, `Low_blood_pressure`, `Haemoglobin`) VALUES ('$fname', '$mname', '$lname', '$unique_id', '$bdate', '$sex', '$contact_number', '$email', '$address', '$pincode', '$state', '$blood_group', '$weight', '$iron_content', '$high_blood_pressure', '$low_blood_pressure', '$haemoglobin');";
-    // echo $sql;
 
-    // Execute the query
     if($con->query($sql) == true){
-        // echo "Successfully inserted";
-
-        // Flag for successful insertion
         $insert = true;
     }
     else{
         echo "ERROR: $sql <br> $con->error";
     }
 
-    // Close the database connection
     $con->close();
 }
 ?>
@@ -70,7 +58,6 @@ if(isset($_POST['fname'])){
         <nav class="navbar" style="background-color: #f00000;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="http://localhost/Dhamni_2.0/donor.php" style="color: white; margin: auto; font-size: 1.8em;">
-                    <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
                     Donor Details Form
                 </a>
             </div>

@@ -3,31 +3,22 @@
 $insert= 0;
 $result = 0;
 if(isset($_POST['area_pincode'])){
-    // Set connection variables
     $server = "localhost";
     $username = "root";
     $pass = "";
 
-    // Create a database connection
     $con = mysqli_connect($server, $username, $pass);
 
-    // Check for connection success
     if(!$con){
         die("connection to this database failed due to" . mysqli_connect_error());
     }
-    // echo "Success connecting to the db";
 
-    // Collect post variables
     $area_pincode= $_POST['area_pincode'];
     $insert = 0;
 
     $sql = "SELECT Name,contact_number,email from `dhamni`.`blood_bank` WHERE Pincode = '$area_pincode';";
-    // echo $sql;
 
-    // Execute the query
     if($con->query($sql) == true){
-        // echo "Successfully inserted";
-        // Flag for successful insertion
         $insert = 1;
         $result = $con->query($sql);
     }
@@ -36,7 +27,6 @@ if(isset($_POST['area_pincode'])){
         echo "ERROR: $sql <br> $con->error";
     }
 
-    // Close the database connection
     $con->close();
 }
 ?>
@@ -57,7 +47,6 @@ if(isset($_POST['area_pincode'])){
         <nav class="navbar" style="background-color: #f00000;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="http://localhost/Dhamni_2.0/recipient_search_bb.php" style="color: white; margin: auto; font-size: 1.8em;">
-                    <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
                     Blood Bank Search Form
                 </a>
             </div>

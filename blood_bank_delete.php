@@ -1,4 +1,6 @@
 <?php
+$err = 0;
+try{
 $insert = 0;
 $server = "localhost";
 $username = "root";
@@ -53,6 +55,10 @@ if ($insert == 1) {
     header("location: http://localhost/Dhamni_2.0/deep/home.html");
     exit();
 }
+
+} catch (Throwable $e) {
+    $err = 1;
+}
 ?>
 
 <!doctype html>
@@ -73,6 +79,9 @@ if ($insert == 1) {
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
+    if ($err == 1){
+        echo "<p align='center' class='alertmsg'>Unexpected Error Occured</p>";
+    }
     if ($insert == 2) {
         echo "<p align='center' class='alertMsg'>Wrong Name !!!</p>";
     } else if ($insert == 3) {

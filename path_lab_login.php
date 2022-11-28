@@ -1,4 +1,6 @@
 <?php
+$err = 0;
+try{
 $insert = 0;
 $flag = 0;
 $name = "a";
@@ -44,6 +46,9 @@ if (isset($_POST['user_id'])) {
     }
 
 }
+} catch (Throwable $e) {
+    $err = 1;
+}
 ?>
 
 <!doctype html>
@@ -59,16 +64,20 @@ if (isset($_POST['user_id'])) {
 </head>
 
 <body>
-<?php
+
+    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+        <img src="home.png" alt="home" style="width: 3.5%;" id="home">
+    </a>
+    <?php
+    if ($err == 1){
+        echo "<p align='center' class='alertmsg'>Unexpected Error Occured</p>";
+    }
     if ($flag == 1) {
         echo "<p align='center' class='alertMsg'>User Id Not Exist !!!</p>";
     } else if ($flag == 2) {
         echo "<p align='center' class='alertMsg'>Wrong Password !!!</p>";
     }
     ?>
-    <a href="http://localhost/Dhamni_2.0/deep/home.html">
-        <img src="home.png" alt="home" style="width: 3.5%;" id="home">
-    </a>
     <div class="card">
         <form action="path_lab_login.php" class="box" method="post">
             <h1>Path Lab</h1>

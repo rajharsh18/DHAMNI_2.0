@@ -1,4 +1,6 @@
 <?php
+$err = 0;
+try{
 $insert = 0;
 if (isset($_POST['reg_no'])) {
     $server = "localhost";
@@ -36,6 +38,9 @@ if (isset($_POST['reg_no'])) {
         exit();
     }
 }
+} catch (Throwable $e) {
+    $err = 1;
+}
 ?>
 
 <!doctype html>
@@ -55,6 +60,11 @@ if (isset($_POST['reg_no'])) {
     <a href="http://localhost/Dhamni_2.0/deep/home.html">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
+    <?php
+    if ($err == 1){
+        echo "<p align='center' class='alertmsg'>Unexpected Error Occured</p>";
+    }
+    ?>
     <div class="card">
         <form action="blood_bank_register.php" class="box" method="post">
             <h1>Blood Bank Registration</h1>

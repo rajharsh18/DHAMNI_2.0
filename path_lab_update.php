@@ -1,5 +1,6 @@
 <?php
-
+$err = 0;
+try{
 $insert = 0;
 $flag = 0;
 $result2 = 0;
@@ -36,15 +37,6 @@ $email2 = $row2['email'];
 
 
 if (isset($_POST['reg_no'])) {
-    // $server = "localhost";
-    // $username = "root";
-    // $pass = "";
-
-    // $con = mysqli_connect($server, $username, $pass);
-
-    // if (!$con) {
-    //     die("connection to this database failed due to" . mysqli_connect_error());
-    // }
 
     $reg_no = $_POST['reg_no'];
     $user_id = $_POST['user_id'];
@@ -85,6 +77,9 @@ if (isset($_POST['reg_no'])) {
     }
     $con->close();
 }
+} catch (Throwable $e) {
+    $err = 1;
+}
 ?>
 
 <!doctype html>
@@ -105,6 +100,9 @@ if (isset($_POST['reg_no'])) {
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
+    if ($err == 1){
+        echo "<p align='center' class='alertmsg'>Unexpected Error Occured</p>";
+    }
     if ($flag == 1) {
         echo "<p align='center' class='alertMsg'>User id Not Exist !!!</p>";
     } else if ($flag == 2) {

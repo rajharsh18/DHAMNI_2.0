@@ -1,4 +1,6 @@
 <?php
+$err = 0;
+try{
 $insert = false;
 if (isset($_POST['fname'])) {
     $server = "localhost";
@@ -38,6 +40,10 @@ if (isset($_POST['fname'])) {
 
     $con->close();
 }
+
+} catch (Throwable $e) {
+    $err = 1;
+}
 ?>
 
 <!doctype html>
@@ -58,6 +64,9 @@ if (isset($_POST['fname'])) {
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
+    if ($err == 1){
+        echo "<p align='center' class='alertmsg'>Unexpected Error Occured</p>";
+    }
     if ($insert == true) {
         echo "<p align='center' class='cnfMsg'>Thanks for joining our Organisation</p>";
     }

@@ -1,11 +1,27 @@
 <?php
+$err = 0;
+try{
+$insert = 0;
+$server = "localhost";
+$username = "root";
+$pass = "";
 
-session_start();
-
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // header("location: login.php");
+$con = mysqli_connect($server, $username, $pass);
+if (!$con) {
+    die("connection to this database failed due to" . mysqli_connect_error());
 }
-
+session_start();
+$name = 'a';
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    $user_id = $_SESSION['user_id'];
+    $sql = "SELECT name FROM `dhamni`.`blood_bank` WHERE `user_id` = '$user_id'";
+    $result = $con->query($sql);
+    $row = mysqli_fetch_array($result);
+    $name = $row['name'];
+}
+} catch (Throwable $e) {
+    $err = 1;
+}
 ?>
 
 
@@ -24,6 +40,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <link rel="stylesheet" href="assets/css/fontawsom-all.min.css">
     <link rel="stylesheet" href="assets/plugins/grid-gallery/css/grid-gallery.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -54,7 +71,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" role="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false" id="anchor-id">
-                                                <?php echo "Welcome " . $_SESSION['name'] ?>
+                                                <?php echo "Welcome " . $name ?>
                                             </a>
                                             <!-- ebjkfk -->
                                             <ul class="dropdown-menu">
@@ -83,6 +100,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
         </div>
     </header>
+    <?php
+    if ($err == 1){
+        echo "<p align='center' class='alertmsg'>Unexpected Error Occured</p>";
+    }
+    ?>
     <div class="slider-detail">
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

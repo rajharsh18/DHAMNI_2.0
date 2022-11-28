@@ -1,4 +1,6 @@
 <?php
+$err = 0;
+try{
 $insert = 0;
 if (isset($_POST['path_lab_id'])) {
     $server = "localhost";
@@ -27,6 +29,9 @@ if (isset($_POST['path_lab_id'])) {
     }
     $con->close();
 }
+} catch (Throwable $e) {
+    $err = 1;
+}
 ?>
 
 <!doctype html>
@@ -42,16 +47,20 @@ if (isset($_POST['path_lab_id'])) {
 </head>
 
 <body style="overflow-x: hidden;">
+    
+    <a href="http://localhost/Dhamni_2.0/deep/homepl.php">
+        <img src="home.png" alt="home" style="width: 3.5%;" id="home">
+    </a>
     <?php
+    if ($err == 1){
+        echo "<p align='center' class='alertmsg'>Unexpected Error Occured</p>";
+    }
     if ($insert == 1) {
         echo "<p align='center' class='cnfMsg'>Data Updated</p>";
     } else if ($insert == 2) {
         echo "<p align='center' class='alertMsg'>None of the rows are affected.</p>";
     }
     ?>
-    <a href="http://localhost/Dhamni_2.0/deep/homepl.php">
-        <img src="home.png" alt="home" style="width: 3.5%;" id="home">
-    </a>
     <div class="card">
         <form action="examines.php" class="box" method="post">
             <h1>Examination Details</h1>

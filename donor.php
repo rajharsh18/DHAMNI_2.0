@@ -1,13 +1,12 @@
-
 <?php
 $insert = false;
-if(isset($_POST['fname'])){
+if (isset($_POST['fname'])) {
     $server = "localhost";
     $username = "root";
     $pass = "";
     $con = mysqli_connect($server, $username, $pass);
 
-    if(!$con){
+    if (!$con) {
         die("connection to this database failed due to" . mysqli_connect_error());
     }
 
@@ -28,13 +27,12 @@ if(isset($_POST['fname'])){
     $high_blood_pressure = $_POST['high_blood_pressure'];
     $low_blood_pressure = $_POST['low_blood_pressure'];
     $haemoglobin = $_POST['haemoglobin'];
-    
+
     $sql = "INSERT INTO `dhamni`.`donor` (`Fname`, `Mname`, `Lname`, `Unique_id`, `Bdate`, `Sex`, `Contact_Number`, `Email`, `Address`, `Pincode`, `State`, `Blood_group`, `Weight`, `Iron_content`, `High_blood_pressure`, `Low_blood_pressure`, `Haemoglobin`) VALUES ('$fname', '$mname', '$lname', '$unique_id', '$bdate', '$sex', '$contact_number', '$email', '$address', '$pincode', '$state', '$blood_group', '$weight', '$iron_content', '$high_blood_pressure', '$low_blood_pressure', '$haemoglobin');";
 
-    if($con->query($sql) == true){
+    if ($con->query($sql) == true) {
         $insert = true;
-    }
-    else{
+    } else {
         echo "ERROR: $sql <br> $con->error";
     }
 
@@ -51,75 +49,51 @@ if(isset($_POST['fname'])){
     <title>Donor Details Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="register.css">
 </head>
 
-<body style="overflow-x: hidden;">
-    <header>
-        <nav class="navbar" style="background-color: #f00000;">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/donor.php" style="color: white; margin: auto; font-size: 1.8em;">
-                    Donor Details Form
-                </a>
-            </div>
-        </nav>
-    </header>
+<body>
     <?php
-        if($insert == true){
+    if ($insert == true) {
         echo "<p class='submitMsg'>Thanks for joining our organisation</p>";
-        }
+    }
     ?>
-    <main>
-        <form class="row g-3" style="padding: 5%;" action="donor.php" method="post">
-
-            <div class="col-md-4">
-                <label for="inputFname" class="form-label">First Name</label>
-                <input type="text" name="fname" class="form-control" id="inputFname" required>
+    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+        <img src="home.png" alt="home" style="width: 3.5%;" id="home">
+    </a>
+    <div class="card">
+        <form action="donor.php" class="box" method="post">
+            <h1>Donor Registration</h1>
+            <p class="text-muted"> Please enter your details here</p>
+            <div>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="fname"
+                    class="form-control" id="inputFname" placeholder="First Name" required>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="mname"
+                    class="form-control" id="inputMname" placeholder="Middle Name">
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="lname"
+                    class="form-control" id="inputLname" placeholder="Last Name">
             </div>
-            <div class="col-md-4">
-                <label for="inputMname" class="form-label">Middle Name</label>
-                <input type="text" name="mname" class="form-control" id="inputMname">
-            </div>
-            <div class="col-md-4">
-                <label for="inputLname" class="form-label">Last Name</label>
-                <input type="text" name="lname" class="form-control" id="inputLname">
-            </div>
-            <div class="col-6">
-                <label for="inputID" class="form-label">Unique ID</label>
-                <input type="text" name="unique_id" class="form-control" id="inputID" required>
-            </div>
-            <div class="col-3">
-                <label for="inputBdate" class="form-label">Birth Date</label>
-                <input type="date" name="bdate" class="form-control" id="inputBdate" required>
-            </div>
-            <div class="col-md-3">
-                <label for="inputSex" class="form-label">Gender</label>
-                <select id="inputSex" name="sex" class="form-select" required>
+            <div>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="unique_id"
+                    class="form-control" id="inputID" placeholder="Unique ID" required>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="date" name="bdate"
+                    class="form-control" id="inputBdate" placeholder="Birth Date" required>
+                <select style="display: inline;margin-left: 3%;margin-right:3%;" id="inputSex" name="sex"
+                    class="form-select" required>
                     <option selected>Select Gender</option>
                     <option value="M">Male</option>
                     <option value="F">Female</option>
                     <option value="O">Others</option>
                 </select>
             </div>
-            <div class="col-md-6">
-                <label for="inputContact" class="form-label">Contact Number</label>
-                <input type="number" name="contact_number" class="form-control" id="inputContact" required>
+            <div>
+                <input type="number" name="contact_number" class="form-control" id="inputContact"
+                    placeholder="Contact Number" required>
+                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email">
             </div>
-            <div class="col-md-6">
-                <label for="inputEmail" class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" id="inputEmail">
-            </div>
-
-            <div class="col-12">
-                <label for="inputAddress" class="form-label">Address</label>
-                <input type="text" name="address" class="form-control" id="inputAddress" required>
-            </div>
-            <div class="col-md-6">
-                <label for="inputPin" class="form-label">Pin Code</label>
-                <input type="number" name="pincode" class="form-control" id="inputPin" required>
-            </div>
-
-            <div class="col-md-6">
-                <label for="inputState" class="form-label">State</label>
+            <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address" required>
+            <div>
+                <input type="number" name="pincode" class="form-control" id="inputPin" placeholder="Pin Code" required>
                 <select id="inputState" name="state" class="form-select" required>
                     <option selected>Select State</option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -160,9 +134,9 @@ if(isset($_POST['fname'])){
                     <option value="West Bengal">West Bengal</option>
                 </select>
             </div>
-            <div class="col-2">
-                <label for="inputBGroup" class="form-label">Blood Group</label>
-                <select id="inputBGroup" name="blood_group" class="form-select">
+            <div>
+                <select style="display: inline;margin-left: 3%;margin-right:3%;" id="inputBGroup" name="blood_group"
+                    class="form-select">
                     <option selected>Blood Group</option>
                     <option value="A +">A +</option>
                     <option value="A -">A -</option>
@@ -174,32 +148,25 @@ if(isset($_POST['fname'])){
                     <option value="AB -">AB -</option>
                     <option value="NULL">Don't Know</option>
                 </select>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="number" name="weight"
+                    class="form-control" id="inputWeight" placeholder="Weight">
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="iron_content"
+                    class="form-control" id="inputIContent" placeholder="Iron Content (mcg/dL)">
             </div>
-            <div class="col-2">
-                <label for="inputWeight" class="form-label">Weight</label>
-                <input type="number" name="weight" class="form-control" id="inputWeight">
+            <div>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="high_blood_pressure"
+                    class="form-control" id="inputHBPressure" placeholder="High BP (mmhg)">
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="low_blood_pressure"
+                    class="form-control" id="inputLBPressure" placeholder="Low BP (mmhg)">
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="haemoglobin"
+                    class="form-control" id="inputHaemoglobin" placeholder="Haemoglobin (g/dL)">
             </div>
-            <div class="col-2">
-                <label for="inputIContent" class="form-label">Blood Iron Content</label>
-                <input type="text" name="iron_content" class="form-control" id="inputIContent" placeholder="mcg/dL">
-            </div>
-            <div class="col-2">
-                <label for="inputHBPressure" class="form-label">High Blood Pressure</label>
-                <input type="text" name="high_blood_pressure" class="form-control" id="inputHBPressure" placeholder="mmhg">
-            </div>
-            <div class="col-2">
-                <label for="inputLBPressure" class="form-label">Low Blood Pressure</label>
-                <input type="text" name="low_blood_pressure" class="form-control" id="inputLBPressure" placeholder="mmhg">
-            </div>
-            <div class="col-2">
-                <label for="inputHaemoglobin" class="form-label">Haemoglobin</label>
-                <input type="text" name="haemoglobin" class="form-control" id="inputHaemoglobin" placeholder="g/dL">
-            </div>
-            <div class="col-12" style="text-align: center;" >
-                <button type="submit" name="" class="btn btn-primary">Submit</button>
-            </div>
+            <button type="submit" class="btn-submit">Register</button>
+            <!-- <label class="form-label" style="color: antiquewhite">Already an user?
+                <a href="http://localhost/Dhamni_2.0/path_lab_register.php">Log In as a Donor</a>
+            </label> -->
         </form>
-    </main>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>

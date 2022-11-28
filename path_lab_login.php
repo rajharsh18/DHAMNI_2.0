@@ -52,47 +52,33 @@ if (isset($_POST['user_id'])) {
     <title>Path-Lab Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="login.css">
 </head>
 
-<body style="overflow-x: hidden;">
-    <header>
-        <nav class="navbar" style="background-color: #f00000;">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/path_lab_login.php"
-                    style="color: white; margin: auto; font-size: 1.8em;">
-                    Path-Lab Login
-                </a>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <?php
+<body>
+    <?php
     if ($flag == 1) {
         echo "User id Not Exist !!!";
     } else if ($flag == 2) {
         echo "Wrong Password !!!";
     }
     ?>
-        <form class="row g-3" style="padding: 5%;" action="path_lab_login.php" method="post">
-
-            <div class="col-md-6">
-                <label for="inputUserid" class="form-label">User ID</label>
-                <input type="text" name="user_id" class="form-control" id="inputUserid" required>
-            </div>
-            <div class="col-6">
-                <label for="inputPassword" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="inputPassword" required>
-            </div>
-            <div class="col-12" style="text-align: center;">
-                <button type="submit" class="btn btn-primary" onclick="sendlogin()">Login</button>
-            </div>
-            <div style="text-align: center;">
-                <label class="form-label">Not Registered?
-                    <a href="http://localhost/Dhamni_2.0/path_lab_register.php">Register as a Path Lab</a>
-                </label>
-            </div>
+    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+        <img src="home.png" alt="home" style="width: 3.5%;" id="home">
+    </a>
+    <div class="card">
+        <form action="path_lab_login.php" class="box" method="post">
+            <h1>Path Lab</h1>
+            <p class="text-muted"> Please enter your login and password!</p>
+            <input type="text" name="user_id" class="form-control" id="inputUserid" placeholder="User Name" required>
+            <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password"
+                required>
+            <button type="submit" class="btn-submit">Login</button>
+            <label class="form-label" style="color: antiquewhite">Not Registered?
+                <a href="http://localhost/Dhamni_2.0/path_lab_register.php">Register as a Path Lab</a>
+            </label>
         </form>
-    </main>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
@@ -102,12 +88,6 @@ if (isset($_POST['user_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
-    <script>
-        function sendlogin() {
-            uid = document.getElementById("inputUserid");
-            navigator.clipboard.writeText(uid.value).then(success => console.log("text copied"), err => console.log("error copying text"));
-        }
-    </script>
 </body>
 
 </html>

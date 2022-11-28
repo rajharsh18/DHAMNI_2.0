@@ -1,0 +1,115 @@
+body {
+    height: 1040px;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: linear-gradient(to right, #b92b27, #1565c0)
+}
+
+.card {
+    margin-top: -45px;
+    margin-bottom: 20px;
+    margin-left: -500px;
+    border: none;
+}
+
+#home {
+    position: relative;
+    top: 20px;
+    left: 20px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.box {
+    width: 1200px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    background: #191919;
+    text-align: center;
+    transition: 0.25s;
+    margin: auto 0;
+    margin-top: 100px;
+    box-shadow: 10px 10px 40px 1px rgba(41, 42, 43, 0.674);
+}
+
+.box input[type="text"],
+.box input[type="password"],
+.box input[type="number"],
+.box input[type="date"],
+.box input[type="email"],
+.box select {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: rgb(148, 163, 165);
+    border-radius: 24px;
+    transition: 0.25s
+}
+
+.box select option {
+    color: black;
+}
+
+.box h1 {
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-transform: uppercase;
+    font-weight: 500
+}
+
+#inputState,
+#inputPin,
+#inputContact,
+#inputEmail{
+    display: inline;
+    margin-left: 3%;
+    margin-right: 3%;
+    width: 37%;
+}
+
+#inputAddress {
+    width: 80%
+}
+
+#inputAddress:focus {
+    width: 90%
+}
+
+.box input[type="text"]:focus,
+.box input[type="password"]:focus,
+.box input[type="number"]:focus,
+.box input[type="date"]:focus,
+.box input[type="email"]:focus,
+.box select:focus {
+    width: 300px;
+    border-color: #2ecc71
+}
+
+.btn-submit {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer
+}
+
+.btn-submit:hover {
+    width: 20%;
+    background: #2ecc71
+}

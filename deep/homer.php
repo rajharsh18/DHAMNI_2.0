@@ -50,7 +50,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                                aria-expanded="false" id="anchor-id"> <?php echo "Welcome ".$_SESSION['user_id']?>
+                                                aria-expanded="false" id="anchor-id"> <?php echo "Welcome ".$_SESSION['name']?>
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item"

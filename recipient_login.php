@@ -1,6 +1,7 @@
 <?php
 $insert = 0;
 $flag = 0;
+$name = 'a';
 if (isset($_POST['contact_number'])) {
     $server = "localhost";
     $username = "root";
@@ -14,7 +15,7 @@ if (isset($_POST['contact_number'])) {
 
     $contact_number = $_POST['contact_number'];
     $password = $_POST['password'];
-    $sql = "SELECT contact_number, password FROM `dhamni`.`recipient` WHERE contact_number = '$contact_number';";
+    $sql = "SELECT contact_number, password, fname, mname, lname FROM `dhamni`.`recipient` WHERE contact_number = '$contact_number';";
 
     if ($con->query($sql) == true) {
         $result = $con->query($sql);
@@ -29,8 +30,9 @@ if (isset($_POST['contact_number'])) {
         $flag = 1;
     } else if ($insert == 1) {
         if ($password == $row["password"]) {
+            $name = $row['fname']." ".$row['mname']." ".$row['lname'];
             session_start();
-            $_SESSION["user_id"] = $user_id;
+            $_SESSION["name"] = $name;
             $_SESSION[""] = true;
             header("Location: http://localhost/Dhamni_2.0/deep/homer.php");
             exit();

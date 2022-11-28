@@ -1,6 +1,7 @@
 <?php
 $insert = 0;
 $flag = 0;
+$name = 'a';
 if (isset($_POST['user_id'])) {
     $server = "localhost";
     $username = "root";
@@ -14,7 +15,7 @@ if (isset($_POST['user_id'])) {
 
     $user_id = $_POST['user_id'];
     $password = $_POST['password'];
-    $sql = "SELECT user_id, password FROM `dhamni`.`blood_bank` WHERE user_id = '$user_id';";
+    $sql = "SELECT user_id, password, name FROM `dhamni`.`blood_bank` WHERE user_id = '$user_id';";
 
     if ($con->query($sql) == true) {
         $result = $con->query($sql);
@@ -27,8 +28,9 @@ if (isset($_POST['user_id'])) {
         $flag = 1;
     } else if ($insert == 1) {
         if ($password == $row["password"]) {
+            $name = $row['name'];
             session_start();
-            $_SESSION["user_id"] = $user_id;
+            $_SESSION["name"] = $name;
             $_SESSION[""] = true;
             header("Location: http://localhost/Dhamni_2.0/deep/homebb.php");
             exit();

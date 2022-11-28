@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
+{
+    // header("location: login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,26 +43,26 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="nav-item">
-                                            <a class="nav-link active" aria-current="page" href="#">Recipient</a>
+                                            <a class="nav-link active" aria-current="page" href="#">Path Lab</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">About Us</a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                                aria-expanded="false" id="anchor-id">
+                                                aria-expanded="false" id="anchor-id"> <?php echo "Welcome ".$_SESSION['user_id']?>
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item"
-                                                        href="http://localhost/Dhamni_2.0/recipient_search.php">Search by Blood Group</a>
-                                                </li>
-                                                <li><a class="dropdown-item"
-                                                        href="http://localhost/Dhamni_2.0/recipient_search_bb.php">Search Blood Bank</a>
-                                                </li>
+                                                <li><a class="dropdown-item" href="http://localhost/Dhamni_2.0/path_lab_delete.php">Path
+                                                        Lab Delete</a></li>
+                                                <li><a class="dropdown-item" href="http://localhost/Dhamni_2.0/path_lab_update.php">Path
+                                                        Lab Update</a></li>
+                                                <li><a class="dropdown-item" href="http://localhost/Dhamni_2.0/examines.php">Examination
+                                                        Details</a></li>
                                             </ul>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="btn btn-danger" href="http://localhost/Dhamni_2.0/deep/home.html"
+                                            <a class="btn btn-danger" href="http://localhost/Dhamni_2.0/logout.php"
                                                 role="button">Log Out</a>
                                         </li>
                                     </ul>
@@ -210,9 +220,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
-    <script>
-        var anc = document.getElementById('anchor-id');
-        navigator.clipboard.readText().then(cliptext => anc.innerHTML = cliptext, err => console.log(err));
-    </script>
+
 </body>
 </html>

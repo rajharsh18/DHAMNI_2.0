@@ -29,7 +29,10 @@ if (isset($_POST['contact_number'])) {
         $flag = 1;
     } else if ($insert == 1) {
         if ($password == $row["password"]) {
-            header("Location: http://localhost/Dhamni_2.0/deep/homer.html");
+            session_start();
+            $_SESSION["user_id"] = $user_id;
+            $_SESSION[""] = true;
+            header("Location: http://localhost/Dhamni_2.0/deep/homer.php");
             exit();
         } else if ($insert == 1 && $password != $row["password"]) {
             $flag = 2;

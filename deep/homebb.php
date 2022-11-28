@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
+{
+    // header("location: login.php");
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,8 +52,9 @@
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                                aria-expanded="false" id="anchor-id">
+                                                aria-expanded="false" id="anchor-id"> <?php echo "Welcome ".$_SESSION['user_id']?>
                                             </a>
+                                            <!-- ebjkfk -->
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item"
                                                         href="http://localhost/Dhamni_2.0/blood_bank_update.php">Blood Bank Update</a>
@@ -55,7 +68,7 @@
                                             </ul>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="btn btn-danger" href="http://localhost/Dhamni_2.0/deep/home.html"
+                                            <a class="btn btn-danger" href="http://localhost/Dhamni_2.0/logout.php"
                                                 role="button">Log Out</a>
                                         </li>
                                     </ul>
@@ -213,9 +226,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
-    <script>
-        var anc = document.getElementById('anchor-id');
-        navigator.clipboard.readText().then(cliptext => anc.innerHTML = cliptext, err => console.log(err));
-    </script>
+
 </body>
 </html>

@@ -30,7 +30,10 @@ if (isset($_POST['user_id'])) {
         $flag = 1;
     } else if ($insert == 1) {
         if ($password == $row["password"]) {
-            header("Location: http://localhost/Dhamni_2.0/deep/homepl.html");
+            session_start();
+            $_SESSION["user_id"] = $user_id;
+            $_SESSION[""] = true;
+            header("Location: http://localhost/Dhamni_2.0/deep/homepl.php");
             exit();
         } else if ($insert == 1 && $password != $row["password"]) {
             $flag = 2;

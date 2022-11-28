@@ -62,7 +62,7 @@ if(isset($_POST['reg_no'])){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Path-lab Update</title>
+    <title>Blood-bank Update</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
@@ -72,7 +72,7 @@ if(isset($_POST['reg_no'])){
         <nav class="navbar" style="background-color: #f00000;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="http://localhost/Dhamni_2.0/blood_bank_update.php" style="color: white; margin: auto; font-size: 1.8em;">
-                    Path-lab Update Form
+                    Blood-bank Update Form
                 </a>
             </div>
         </nav>
@@ -113,7 +113,7 @@ if(isset($_POST['reg_no'])){
             <input type="text" name="reg_no" class="form-control" id="inputReg" required>
         </div>
         <div class="col-6">
-            <label for="inputName" class="form-label">Name of Path Lab</label>
+            <label for="inputName" class="form-label">Name of Blood Bank</label>
             <input type="text" name="name" class="form-control" id="inputName" required>
         </div>
         <div class="col-md-6">

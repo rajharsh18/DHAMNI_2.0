@@ -69,26 +69,26 @@ if(isset($_POST['area_pincode'])){
         if ($insert == 1) {
             // output data of each row
             
-            echo "<main style='width: 90%; margin: auto;'>";
-            echo "Blood Banks";
-            echo "<table class='table table-striped' style='border: 1px solid black;' >
-            <thead>
+            echo "<main style='width: 90%; margin: auto; text-align: center;>";
+            echo "<div style='text-align: center;'><p style='background-image: linear-gradient(to bottom, rgb(40, 8, 8),rgb(132, 4, 4)); border-radius:15px;color:white; display: inline-block; padding:3px 10px;font-size:1.5em;' disabled>Blood Banks</p></div>";
+            echo "<table class='table table-striped' >
+            <thead style='color:antiquewhite;font-size:1.2em; font-family:Arial, Helvetica, sans-serif;border-radius: 5px; background-image: linear-gradient(to right, rgba(34, 57, 12,1), rgba(85, 10, 10,1));'>
                 <tr>
-                <th>S. No.</th>
-                <th>Name</th>
-                <th>Contact_Number</th>
-                <th>Email</th>
+                <th scope='col' style='width: 10%;margin: auto;text-align: center;'>S. No.</th>
+                <th scope='col' style='width: 30%;margin: auto;text-align: center;'>Name</th>
+                <th scope='col' style='width: 30%;margin: auto;text-align: center;'>Contact Number</th>
+                <th scope='col' style='width: 30%;margin: auto;text-align: center;'>Email</th>
                 </tr>
             </thead>
-            <tbody>";
+            <tbody style='color:rgb(27, 25, 22); font-family: Arial, Helvetica, sans-serif;border-radius: 5px; background-image: linear-gradient(to right, rgba(163, 228, 150, 0.836), rgba(198, 172, 116, 0.795));''>";
             $code = 1;
                 while($row = mysqli_fetch_array($result)){
 
                     echo "<tr>";
-                    echo "<td>$code</td>";
-                    echo "<td>" . $row['Name'] . "</td>";
-                    echo "<td>" . $row['contact_number'] . "</td>";
-                    echo "<td>" . $row['email'] . "</td>";
+                    echo "<td style='width: 10%;margin: auto;text-align: center; font-weight: bold;'>$code</td>";
+                    echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['Name'] . "</td>";
+                    echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['contact_number'] . "</td>";
+                    echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['email'] . "</td>";
                     echo "</tr>";
                     $code = $code + 1;
                 }

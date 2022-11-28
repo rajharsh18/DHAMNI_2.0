@@ -1,60 +1,42 @@
-
 <?php
 $insert = 0;
 $flag = 0;
-if(isset($_POST['user_id'])){
-    // Set connection variables
+if (isset($_POST['user_id'])) {
     $server = "localhost";
     $username = "root";
     $pass = "";
 
-    // Create a database connection
     $con = mysqli_connect($server, $username, $pass);
 
-    // Check for connection success
-    if(!$con){
+    if (!$con) {
         die("connection to this database failed due to" . mysqli_connect_error());
     }
-    // echo "Success connecting to the db";
 
-    // Collect post variables
     $user_id = $_POST['user_id'];
     $password = $_POST['password'];
     $sql = "SELECT user_id, password FROM `dhamni`.`path_lab` WHERE user_id = '$user_id';";
-    // echo $sql;
 
-    // Execute the query
-    if($con->query($sql) == true){
-        // echo "Successfully inserted";
-        // Flag for successful insertion
+    if ($con->query($sql) == true) {
         $result = $con->query($sql);
         $row = mysqli_fetch_array($result);
-        // $password = $row["password"];
         $insert = 1;
-    }
-    else{
+    } else {
         $insert = 2;
         echo "ERROR: $sql <br> $con->error";
     }
-
-    // Close the database connection
     $con->close();
-    
-    if ($result->num_rows == 0){
+
+    if ($result->num_rows == 0) {
         $flag = 1;
-        // echo "User id Not Exist !!!";
-    }
-    else if ($insert == 1){
-        if ($password==$row["password"]){
-            header("Location: http://localhost/Dhamni_2.0/dhamni.html");
+    } else if ($insert == 1) {
+        if ($password == $row["password"]) {
+            header("Location: http://localhost/Dhamni_2.0/deep/homepl.html");
             exit();
-        }
-        else if ($insert == 1 && $password != $row["password"]){
+        } else if ($insert == 1 && $password != $row["password"]) {
             $flag = 2;
-            // echo "Wrong Password !!!"; 
         }
     }
-    
+
 }
 ?>
 
@@ -73,21 +55,20 @@ if(isset($_POST['user_id'])){
     <header>
         <nav class="navbar" style="background-color: #f00000;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" style="color: white; margin: auto; font-size: 1.8em;">
-                    <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
+                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/path_lab_login.php"
+                    style="color: white; margin: auto; font-size: 1.8em;">
                     Path-Lab Login
                 </a>
             </div>
         </nav>
     </header>
     <main>
-    <?php
-        if($flag == 1){
-            echo "User id Not Exist !!!";
-        }
-        else if ($flag == 2){
-            echo "Wrong Password !!!";
-        }
+        <?php
+    if ($flag == 1) {
+        echo "User id Not Exist !!!";
+    } else if ($flag == 2) {
+        echo "Wrong Password !!!";
+    }
     ?>
         <form class="row g-3" style="padding: 5%;" action="path_lab_login.php" method="post">
 
@@ -99,13 +80,13 @@ if(isset($_POST['user_id'])){
                 <label for="inputPassword" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" id="inputPassword" required>
             </div>
-            <div class="col-12" style="text-align: center;" >
-                <button type="submit" class="btn btn-primary">Login</button>
+            <div class="col-12" style="text-align: center;">
+                <button type="submit" class="btn btn-primary" onclick="sendlogin()">Login</button>
             </div>
             <div style="text-align: center;">
-            <label class="form-label">Not Registered? 
-                <a href="http://localhost/Dhamni_2.0/path_lab_add.php">Register as a Path Lab</a>
-            </label>
+                <label class="form-label">Not Registered?
+                    <a href="http://localhost/Dhamni_2.0/path_lab_register.php">Register as a Path Lab</a>
+                </label>
             </div>
         </form>
     </main>
@@ -118,6 +99,12 @@ if(isset($_POST['user_id'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
+    <script>
+        function sendlogin() {
+            uid = document.getElementById("inputUserid");
+            navigator.clipboard.writeText(uid.value).then(success => console.log("text copied"), err => console.log("error copying text"));
+        }
+    </script>
 </body>
 
 </html>

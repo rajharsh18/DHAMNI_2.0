@@ -1,22 +1,16 @@
 
 <?php
 $insert = 0;
+$flag = 0;
 if(isset($_POST['reg_no'])){
-    // Set connection variables
     $server = "localhost";
     $username = "root";
     $pass = "";
-
-    // Create a database connection
     $con = mysqli_connect($server, $username, $pass);
-
-    // Check for connection success
     if(!$con){
         die("connection to this database failed due to" . mysqli_connect_error());
     }
-    // echo "Success connecting to the db";
 
-    // Collect post variables
     $reg_no = $_POST['reg_no'];
     $user_id = $_POST['user_id'];
     $password = $_POST['password'];
@@ -26,29 +20,39 @@ if(isset($_POST['reg_no'])){
     $state = $_POST['state'];
     $contact_number = $_POST['contact_number'];
     $email = $_POST['email'];
-    $sql = "INSERT INTO `dhamni`.`blood_bank` (`reg_no`, `user_id`, `password`, `name`, `address`, `pincode`,`state`, `contact_number`, `email`) VALUES ('$reg_no', '$user_id', '$password', '$name', '$address', '$pincode','$state' , '$contact_number', '$email')";
-    $sql2 = "INSERT INTO `dhamni`.`blood` (`Blood_bank_id`, `Blood_group`, `Quantity`) VALUES ('$reg_no', 'A +', '0'), ('$reg_no', 'A -', '0'), ('$reg_no', 'B +', '0'), ('$reg_no', 'B -', '0'), ('$reg_no', 'AB +', '0'), ('$reg_no', 'AB -', '0'), ('$reg_no', 'O +', '0'), ('$reg_no', 'O -', '0');";
-    // echo $sql;
-    // Execute the query
-    if($con->query($sql) == true){
-        // echo "Successfully inserted";
+    $sql1 = "UPDATE `dhamni`.`blood_bank` SET `Name` = '$name', `Address` = '$address', `Pincode` = '$pincode', `Contact_Number` = '$contact_number', `Email` = '$email', `state`='$state' WHERE `Reg_no` = '$reg_no' AND `user_id` = '$user_id' AND `password`='$password';";
+    $sql = "SELECT password, reg_no FROM `dhamni`.`path_lab` WHERE `user_id` = '$user_id';";
 
-        // Flag for successful insertion
-        $result = $con->query($sql2);
+    if($con->query($sql) == true){
+        $result = $con->query($sql);
+        $row = mysqli_fetch_array($result);
         $insert = 1;
+        if(mysqli_affected_rows($con)==0){
+            $insert = 2;
+        }
     }
     else{
-        $insert=2;
         echo "ERROR: $sql <br> $con->error";
     }
 
-    // Close the database connection
-    $con->close();
-
-    if ($insert == 1){
-        header("Location: http://localhost/Dhamni_2.0/blood_bank_login.php");
-        exit();
+    if ($result->num_rows == 0){
+        $flag=1;
     }
+    else if ($insert == 1){
+        if ($password==$row["password"]){
+            if($reg_no != $row["reg_no"]){
+                $flag = 2;
+            }
+            else if($reg_no == $row["reg_no"]){
+                $flag = 3;
+                $con->query($sql1);
+            }
+        }
+        else if ($insert == 1 && $password != $row["password"]){
+            $flag = 4;
+        }
+    }
+    $con->close();
 }
 ?>
 
@@ -58,7 +62,7 @@ if(isset($_POST['reg_no'])){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Blood Bank Registration</title>
+    <title>Path-lab Update</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
@@ -67,23 +71,35 @@ if(isset($_POST['reg_no'])){
     <header>
         <nav class="navbar" style="background-color: #f00000;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" style="color: white; margin: auto; font-size: 1.8em;">
-                    <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
-                    Blood-Bank Registration Form
+                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/blood_bank_update.php" style="color: white; margin: auto; font-size: 1.8em;">
+                    Path-lab Update Form
                 </a>
             </div>
         </nav>
     </header>
     <?php
-        if($insert == 1){
-        echo "<p class='submitMsg'>Thanks for joining our organisation</p>";
+        if($flag == 1){
+            echo "User id Not Exist !!!";
         }
-        else if($insert == 2){
-            echo "ERROR: $sql <br> $con->error";
+        else if ($flag == 2){
+            echo "Wrong Registration Number !!!";
         }
+        else if ($flag == 3){
+            if($insert == 1){
+                echo "<p class='submitMsg'>Thanks for joining our organisation</p>";
+            }
+                else if($insert == 2){
+                    echo "<p class='submitMsg'>None of the rows are affected.</p>";
+                }
+        }
+        else if ($flag == 4){
+            echo "Wrong Password !!!";
+        }
+
+        
     ?>
     <main>
-        <form class="row g-3" style="padding: 5%;" action="blood_bank_add.php" method="post">
+        <form class="row g-3" style="padding: 5%;" action="blood_bank_update.php" method="post">
         <div class="col-md-6">
             <label for="inputUserId" class="form-label">User ID</label>
             <input type="text" name="user_id" class="form-control" id="inputUserId" required>
@@ -159,12 +175,7 @@ if(isset($_POST['reg_no'])){
             </select>
         </div>
         <div class="col-12" style="text-align: center;" >
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-        </div>
-        <div style="text-align: center;">
-        <label class="form-label">Alredy a Member? 
-            <a href="http://localhost/Dhamni_2.0/blood_bank_login.php">Sign in as a Blood Bank</a>
-            </label>
+            <button type="submit" class="btn btn-primary">Update</button>
         </div>
         </form>
     </main>

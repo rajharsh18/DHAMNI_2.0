@@ -3,21 +3,16 @@
 $insert = 0;
 $flag = 0;
 if(isset($_POST['reg_no'])){
-    // Set connection variables
     $server = "localhost";
     $username = "root";
     $pass = "";
 
-    // Create a database connection
     $con = mysqli_connect($server, $username, $pass);
 
-    // Check for connection success
     if(!$con){
         die("connection to this database failed due to" . mysqli_connect_error());
     }
-    // echo "Success connecting to the db";
 
-    // Collect post variables
     $reg_no = $_POST['reg_no'];
     $user_id = $_POST['user_id'];
     $password = $_POST['password'];
@@ -29,11 +24,8 @@ if(isset($_POST['reg_no'])){
     $email = $_POST['email'];
     $sql1 = "UPDATE `dhamni`.`path_lab` SET `Name` = '$name', `Address` = '$address', `Pincode` = '$pincode', `Contact_Number` = '$contact_number', `Email` = '$email', `state`='$state' WHERE `Reg_no` = '$reg_no' AND `user_id` = '$user_id' AND `password`='$password';";
     $sql = "SELECT password, reg_no FROM `dhamni`.`path_lab` WHERE `user_id` = '$user_id';";
-    // echo $sql;
-    // Execute the query
+
     if($con->query($sql) == true){
-        // echo "Successfully inserted";
-        // Flag for successful insertion
         $result = $con->query($sql);
         $row = mysqli_fetch_array($result);
         $insert = 1;
@@ -47,7 +39,6 @@ if(isset($_POST['reg_no'])){
 
     if ($result->num_rows == 0){
         $flag=1;
-        // echo "User id Not Exist !!!";
     }
     else if ($insert == 1){
         if ($password==$row["password"]){
@@ -61,17 +52,9 @@ if(isset($_POST['reg_no'])){
         }
         else if ($insert == 1 && $password != $row["password"]){
             $flag = 4;
-            // echo "Wrong Password !!!"; 
         }
     }
-
-    // Close the database connection
     $con->close();
-
-    if ($insert == 1){
-        // header("Location: http://localhost/Dhamni_2.0/blood_bank_login.php");
-        // exit();
-    }
 }
 ?>
 
@@ -90,8 +73,7 @@ if(isset($_POST['reg_no'])){
     <header>
         <nav class="navbar" style="background-color: #f00000;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" style="color: white; margin: auto; font-size: 1.8em;">
-                    <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
+                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/path_lab_update.php" style="color: white; margin: auto; font-size: 1.8em;">
                     Path-lab Update Form
                 </a>
             </div>

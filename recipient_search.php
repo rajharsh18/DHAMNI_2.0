@@ -4,21 +4,16 @@ $insert= 0;
 $result = 0;
 $result2 = 0;
 if(isset($_POST['quantity_required'])){
-    // Set connection variables
     $server = "localhost";
     $username = "root";
     $pass = "";
 
-    // Create a database connection
     $con = mysqli_connect($server, $username, $pass);
 
-    // Check for connection success
     if(!$con){
         die("connection to this database failed due to" . mysqli_connect_error());
     }
-    // echo "Success connecting to the db";
 
-    // Collect post variables
     $quantity_required = $_POST['quantity_required'];
     $req_blood_group = $_POST['req_blood_group'];
     $area_pincode= $_POST['area_pincode'];
@@ -26,12 +21,8 @@ if(isset($_POST['quantity_required'])){
 
     $sql = "SELECT Fname, Mname, Lname, Sex, Contact_Number, Email FROM `dhamni`.`Donor` WHERE Blood_group LIKE '%$req_blood_group%' AND Pincode = '$area_pincode';";
     $sql2 = "SELECT Name,contact_number,email from `dhamni`.`blood_bank` as bb, `dhamni`.`blood` as b where bb.Pincode = '$area_pincode' AND b.blood_bank_id = bb.reg_no AND b.blood_group LIKE '%$req_blood_group%' AND b.quantity > 0;";
-    // echo $sql;
 
-    // Execute the query
     if($con->query($sql) == true){
-        // echo "Successfully inserted";
-        // Flag for successful insertion
         $insert = 1;
         $result = $con->query($sql);
         $result2 = $con->query($sql2);
@@ -40,8 +31,6 @@ if(isset($_POST['quantity_required'])){
         $insert=2;
         echo "ERROR: $sql <br> $con->error";
     }
-
-    // Close the database connection
     $con->close();
 }
 ?>
@@ -61,8 +50,7 @@ if(isset($_POST['quantity_required'])){
     <header>
         <nav class="navbar" style="background-color: #f00000;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" style="color: white; margin: auto; font-size: 1.8em;">
-                    <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
+                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/recipient_search.php" style="color: white; margin: auto; font-size: 1.8em;">
                     Recipient Search Form
                 </a>
             </div>

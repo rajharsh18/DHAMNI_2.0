@@ -2,35 +2,24 @@
 <?php
 $insert = 0;
 if(isset($_POST['reg_no'])){
-    // Set connection variables
     $server = "localhost";
     $username = "root";
     $pass = "";
-
-    // Create a database connection
+    
     $con = mysqli_connect($server, $username, $pass);
-
-    // Check for connection success
+    
     if(!$con){
         die("connection to this database failed due to" . mysqli_connect_error());
     }
-    // echo "Success connecting to the db";
-
-    // Collect post variables
+    
     $reg_no = $_POST['reg_no'];
     $blood_group = $_POST['blood_group'];
     $quantity = $_POST['quantity'];
     $sql = "UPDATE `dhamni`.`blood` SET `Quantity` = '$quantity' WHERE `Blood_bank_id` LIKE '$reg_no' AND `Blood_group` LIKE '$blood_group';";
     $insert = 0;
-    // echo $sql;
-
-    // Execute the query
+    
     if($con->query($sql) == true){
-        // echo "Successfully inserted";
-
-        // Flag for successful insertion
         $insert = 1;
-        // echo "Affected rows: " . mysqli_affected_rows($con);
         if(mysqli_affected_rows($con)==0){
             $insert = 2;
         }
@@ -38,8 +27,6 @@ if(isset($_POST['reg_no'])){
     else{
         echo "ERROR: $sql <br> $con->error";
     }
-
-    // Close the database connection
     $con->close();
 }
 ?>
@@ -59,8 +46,7 @@ if(isset($_POST['reg_no'])){
     <header>
         <nav class="navbar" style="background-color: #f00000;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" style="color: white; margin: auto; font-size: 1.8em;">
-                    <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
+                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/blood.php" style="color: white; margin: auto; font-size: 1.8em;">
                     Update Blood Information
                 </a>
             </div>

@@ -2,21 +2,16 @@
 <?php
 $insert = 0;
 if(isset($_POST['reg_no'])){
-    // Set connection variables
     $server = "localhost";
     $username = "root";
     $pass = "";
 
-    // Create a database connection
     $con = mysqli_connect($server, $username, $pass);
 
-    // Check for connection success
     if(!$con){
         die("connection to this database failed due to" . mysqli_connect_error());
     }
-    // echo "Success connecting to the db";
 
-    // Collect post variables
     $reg_no = $_POST['reg_no'];
     $user_id = $_POST['user_id'];
     $password = $_POST['password'];
@@ -27,21 +22,14 @@ if(isset($_POST['reg_no'])){
     $contact_number = $_POST['contact_number'];
     $email = $_POST['email'];
     $sql = "INSERT INTO `dhamni`.`path_lab` (`reg_no`, `user_id`,`password`, `name`, `address`, `pincode`,`state`, `contact_number`, `email`) VALUES ('$reg_no', '$user_id', '$password', '$name', '$address', '$pincode', '$state', '$contact_number', '$email')";
-    // echo $sql;
 
-    // Execute the query
     if($con->query($sql) == 1){
-        // echo "Successfully inserted";
-
-        // Flag for successful insertion
         $insert = 1;
     }
     else{
         $insert=2;
         echo "ERROR: $sql <br> $con->error";
     }
-
-    // Close the database connection
     $con->close();
 
     if ($insert == 1){
@@ -66,15 +54,14 @@ if(isset($_POST['reg_no'])){
     <header>
         <nav class="navbar" style="background-color: #f00000;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" style="color: white; margin: auto; font-size: 1.8em;">
-                    <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
+                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/path_lab_register.php" style="color: white; margin: auto; font-size: 1.8em;">
                     Path-Lab Registration Form
                 </a>
             </div>
         </nav>
     </header>
     <main>
-        <form class="row g-3" style="padding: 5%;" action="path_lab_add.php" method="post">
+        <form class="row g-3" style="padding: 5%;" action="path_lab_register.php" method="post">
             <div class="col-md-6">
                 <label for="inputUserId" class="form-label">User ID</label>
                 <input type="text" name="user_id" class="form-control" id="inputUserId" required>

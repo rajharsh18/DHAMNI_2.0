@@ -2,21 +2,15 @@
 <?php
 $insert = 0;
 if(isset($_POST['fname'])){
-    // Set connection variables
     $server = "localhost";
     $username = "root";
     $pass = "";
 
-    // Create a database connection
     $con = mysqli_connect($server, $username, $pass);
-
-    // Check for connection success
     if(!$con){
         die("connection to this database failed due to" . mysqli_connect_error());
     }
-    // echo "Success connecting to the db";
 
-    // Collect post variables
     $fname = $_POST['fname'];
     $mname = $_POST['mname'];
     $lname = $_POST['lname'];
@@ -31,21 +25,14 @@ if(isset($_POST['fname'])){
     $state = $_POST['state'];
     
     $sql = "INSERT INTO `dhamni`.`recipient` (`Fname`, `Mname`, `Lname`, `Unique_id`, `Bdate`, `Sex`, `Contact_Number`, `Email`, `Address`, `Pincode`, `State`, `password`) VALUES ('$fname', '$mname', '$lname', '$unique_id', '$bdate', '$sex', '$contact_number', '$email', '$address', '$pincode', '$state','$password');";
-    // echo $sql;
 
-    // Execute the query
     if($con->query($sql) == 1){
-        // echo "Successfully inserted";
-
-        // Flag for successful insertion
         $insert = 1;
     }
     else{
         $insert=2;
         echo "ERROR: $sql <br> $con->error";
     }
-
-    // Close the database connection
     $con->close();
 
     if ($insert == 1){
@@ -70,8 +57,7 @@ if(isset($_POST['fname'])){
     <header>
         <nav class="navbar" style="background-color: #f00000;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" style="color: white; margin: auto; font-size: 1.8em;">
-                    <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
+                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/recipient_register.php" style="color: white; margin: auto; font-size: 1.8em;">
                     Recipient Registration Form
                 </a>
             </div>

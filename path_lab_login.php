@@ -61,9 +61,9 @@ if (isset($_POST['user_id'])) {
 <body>
 <?php
     if ($flag == 1) {
-        echo "<p class='alertMsg'>User Id Not Exist !!!</p>";
+        echo "<p align='center' class='alertMsg'>User Id Not Exist !!!</p>";
     } else if ($flag == 2) {
-        echo "<p class='alertMsg'>Wrong Password !!!</p>";
+        echo "<p align='center' class='alertMsg'>Wrong Password !!!</p>";
     }
     ?>
     <a href="http://localhost/Dhamni_2.0/deep/home.html">

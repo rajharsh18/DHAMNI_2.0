@@ -103,18 +103,18 @@ if (isset($_POST['reg_no'])) {
     </a>
     <?php
     if ($flag == 1) {
-        echo "<p class='alertMsg'>User id Not Exist !!!</p>";
+        echo "<p align='center' class='alertMsg'>User id Not Exist !!!</p>";
     } else if ($flag == 2) {
         
-        echo "<p class='alertMsg'>Wrong Registration Number !!!</p>";
+        echo "<p align='center' class='alertMsg'>Wrong Registration Number !!!</p>";
     } else if ($flag == 3) {
         if ($insert == 1) {
-            echo "<p class='cnfMsg'>Updated Database</p>";
+            echo "<p align='center' class='cnfMsg'>Updated Database</p>";
         } else if ($insert == 2) {
-            echo "<p class='alertMsg'>None of the rows are affected.</p>";
+            echo "<p align='center' class='alertMsg'>None of the rows are affected.</p>";
         }
     } else if ($flag == 4) {
-        echo "<p class='alertMsg'>Wrong Password !!!</p>";
+        echo "<p align='center' class='alertMsg'>Wrong Password !!!</p>";
     }
     ?>
     

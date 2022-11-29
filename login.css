@@ -11,6 +11,28 @@ body {
     border: none;
 }
 
+.alertMsg{
+    position: relative;
+    top: 10px;
+    color: aquamarine;
+    background-color: rgb(76, 0, 0);
+    padding: 1%;
+    margin: auto;
+    width: 30%;
+    border-radius: 50%;
+}
+
+.cnfMsg{
+    position: relative;
+    top: 10px;
+    color: aquamarine;
+    background-color: rgb(0, 138, 0);
+    padding: 1%;
+    margin: auto;
+    width: 30%;
+    border-radius: 50%;
+}
+
 #home{
     position: relative;
     top: 20px;

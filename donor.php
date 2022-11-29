@@ -59,7 +59,7 @@ if (isset($_POST['fname'])) {
     </a>
     <?php
     if ($insert == true) {
-        echo "<p class='cnfMsg'>Thanks for joining our Organisation</p>";
+        echo "<p align='center' class='cnfMsg'>Thanks for joining our Organisation</p>";
     }
     ?>
     <div class="card">

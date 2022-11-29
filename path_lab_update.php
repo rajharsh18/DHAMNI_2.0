@@ -106,18 +106,18 @@ if (isset($_POST['reg_no'])) {
     </a>
     <?php
     if ($flag == 1) {
-        echo "<p class='alertMsg'>User id Not Exist !!!</p>";
+        echo "<p align='center' class='alertMsg'>User id Not Exist !!!</p>";
     } else if ($flag == 2) {
-        
-        echo "<p class='alertMsg'>Wrong Registration Number !!!</p>";
+
+        echo "<p align='center' class='alertMsg'>Wrong Registration Number !!!</p>";
     } else if ($flag == 3) {
         if ($insert == 1) {
-            echo "<p class='alertMsg'>Thanks for joining our organisation</p>";
+            echo "<p align='center' class='alertMsg'>Thanks for joining our organisation</p>";
         } else if ($insert == 2) {
-            echo "<p class='alertMsg'>None of the rows are affected.</p>";
+            echo "<p align='center' class='alertMsg'>None of the rows are affected.</p>";
         }
     } else if ($flag == 4) {
-        echo "<p class='alertMsg'>Wrong Password !!!</p>";
+        echo "<p align='center' class='alertMsg'>Wrong Password !!!</p>";
     }
     ?>
     <div class="card">
@@ -134,17 +134,23 @@ if (isset($_POST['reg_no'])) {
             </div>
             <div>
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="name"
-                    class="form-control" id="inputName" placeholder="Name of Path Lab" value="<?php echo "$name2"?>" required>
+                    class="form-control" id="inputName" placeholder="Name of Path Lab" value="<?php echo "$name2" ?>"
+                    required>
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="number" name="contact_number"
-                    class="form-control" id="inputContact1" placeholder="Contact Number" value="<?php echo "$contact_number2"?>" required>
+                    class="form-control" id="inputContact1" placeholder="Contact Number"
+                    value="<?php echo "$contact_number2" ?>" required>
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="email" name="email"
-                    class="form-control" id="inputEmail1" placeholder="Email" value="<?php echo "$email2"?>" >
+                    class="form-control" id="inputEmail1" placeholder="Email" value="<?php echo "$email2" ?>">
             </div>
-            <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address" value="<?php echo "$address2"?>" required>
+            <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address"
+                value="<?php echo "$address2" ?>" required>
             <div>
-                <input type="number" name="pincode" class="form-control" id="inputPin" placeholder="Pin Code" value="<?php echo "$pincode2"?>" required>
+                <input type="number" name="pincode" class="form-control" id="inputPin" placeholder="Pin Code"
+                    value="<?php echo "$pincode2" ?>" required>
                 <select id="inputState" name="state" class="form-select" required>
-                    <option selected><?php echo "$state2"?> </option>
+                    <option selected>
+                        <?php echo "$state2" ?>
+                    </option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                     <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>

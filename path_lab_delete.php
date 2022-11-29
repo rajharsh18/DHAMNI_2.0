@@ -71,9 +71,9 @@ if ($insert == 1) {
     </a>
     <?php
     if ($insert == 2) {
-        echo "<p class='alertMsg'>Wrong Name !!!</p>";
+        echo "<p align='center' class='alertMsg'>Wrong Name !!!</p>";
     } else if ($insert == 3) {
-        echo "<p class='alertMsg'>Wrong Registration Number !!!</p>";        
+        echo "<p align='center' class='alertMsg'>Wrong Registration Number !!!</p>";        
     }
     ?>
     <div class="card">

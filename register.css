@@ -54,6 +54,28 @@ body {
     transition: 0.25s
 }
 
+.alertMsg{
+    position: relative;
+    top: 10px;
+    color: aquamarine;
+    background-color: rgb(76, 0, 0);
+    padding: 1%;
+    margin: auto;
+    width: 30%;
+    border-radius: 50%;
+}
+
+.cnfMsg{
+    position: relative;
+    top: 10px;
+    color: aquamarine;
+    background-color: rgb(0, 138, 0);
+    padding: 1%;
+    margin: auto;
+    width: 30%;
+    border-radius: 50%;
+}
+
 .box select option {
     color: black;
 }

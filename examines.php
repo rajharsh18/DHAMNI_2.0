@@ -44,9 +44,9 @@ if (isset($_POST['path_lab_id'])) {
 <body style="overflow-x: hidden;">
     <?php
     if ($insert == 1) {
-        echo "<p class='submitMsg'>Thanks for joining our organisation</p>";
+        echo "<p class='cnfMsg'>Data Updated</p>";
     } else if ($insert == 2) {
-        echo "<p class='submitMsg'>None of the rows are affected.</p>";
+        echo "<p class='alertMsg'>None of the rows are affected.</p>";
     }
     ?>
     <a href="http://localhost/Dhamni_2.0/deep/homepl.php">

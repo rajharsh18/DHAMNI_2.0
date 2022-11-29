@@ -1,26 +1,55 @@
 <?php
 $insert = 0;
+$server = "localhost";
+$username = "root";
+$pass = "";
+
+$con = mysqli_connect($server, $username, $pass);
+if (!$con) {
+    die("connection to this database failed due to" . mysqli_connect_error());
+}
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // header("location: login.php");
+}
+$check = $_SESSION['name'];
+$sql = "SELECT name, reg_no FROM `dhamni`.`path_lab` WHERE `name` = '$check'";
+if ($con->query($sql) == true) {
+    $result = $con->query($sql);
+} else {
+    echo "ERROR: $sql <br> $con->error";
+}
+$row = mysqli_fetch_array($result);
+$name2 = $row['name'];
+$reg_no2 = $row['reg_no'];
+
+
 if (isset($_POST['reg_no'])) {
-    $server = "localhost";
-    $username = "root";
-    $pass = "";
-
-    $con = mysqli_connect($server, $username, $pass);
-
-    if (!$con) {
-        die("connection to this database failed due to" . mysqli_connect_error());
-    }
-
     $reg_no = $_POST['reg_no'];
     $name = $_POST['name'];
-    $sql = "DELETE FROM `dhamni`.`path_lab` WHERE '$reg_no' = `Reg_no` and '$name' = `name`";
+    $sql1 = "DELETE FROM `dhamni`.`path_lab` WHERE '$reg_no' = `Reg_no` and '$name' = `name`";
 
-    if ($con->query($sql) == true) {
-        $insert = true;
-    } else {
-        echo "ERROR: $sql <br> $con->error";
+    if($reg_no2 == $reg_no){
+        if ($name2 == $name){
+            $con->query($sql1);
+            $insert = 1;
+        } else {
+            $insert = 2;
+        }
+    }
+    else if ($reg_no2 != $reg_no){
+        $insert = 3;
     }
     $con->close();
+}
+
+if ($insert == 1) {
+    // session_start();
+    $_SESSION = array();
+    session_destroy();
+    header("location: http://localhost/Dhamni_2.0/deep/home.html");
+    exit();
 }
 ?>
 
@@ -37,14 +66,16 @@ if (isset($_POST['reg_no'])) {
 </head>
 
 <body style="overflow-x: hidden;">
-    <?php
-    if ($insert == true) {
-        echo "<p class='submitMsg'>Thanks for joining our organisation</p>";
-    }
-    ?>
     <a href="http://localhost/Dhamni_2.0/deep/homepl.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
+    <?php
+    if ($insert == 2) {
+        echo "<p class='alertMsg'>Wrong Name !!!</p>";
+    } else if ($insert == 3) {
+        echo "<p class='alertMsg'>Wrong Registration Number !!!</p>";        
+    }
+    ?>
     <div class="card">
         <form action="path_lab_delete.php" class="box" method="post">
             <h1>Path Lab Delete</h1>
@@ -53,7 +84,7 @@ if (isset($_POST['reg_no'])) {
                 required>
             <input type="text" name="name" class="form-control" id="inputName" placeholder="Name of Path Lab"
                 required>
-            <button type="submit" class="btn-submit">Delete</button>
+            <button type="submit" class="btn-submit" href="http://localhost/Dhamni_2.0/logout.php">Delete</button>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

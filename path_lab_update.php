@@ -1,16 +1,50 @@
 <?php
+
 $insert = 0;
 $flag = 0;
+$result2 = 0;
+
+$server = "localhost";
+$username = "root";
+$pass = "";
+$con = mysqli_connect($server, $username, $pass);
+if (!$con) {
+    die("connection to this database failed due to" . mysqli_connect_error());
+}
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // header("location: login.php");
+}
+
+$check = $_SESSION['user_id'];
+$sql2 = "SELECT name, address, pincode, state, contact_number, email FROM `dhamni`.`path_lab` WHERE `user_id` = '$check';";
+
+if ($con->query($sql2) == true) {
+    $result2 = $con->query($sql2);
+    // $row2 = mysqli_fetch_array($result2);
+} else {
+    echo "ERROR: $sql <br> $con->error";
+}
+$row2 = mysqli_fetch_array($result2);
+$name2 = $row2['name'];
+$address2 = $row2['address'];
+$pincode2 = $row2['pincode'];
+$state2 = $row2['state'];
+$contact_number2 = $row2['contact_number'];
+$email2 = $row2['email'];
+
+
 if (isset($_POST['reg_no'])) {
-    $server = "localhost";
-    $username = "root";
-    $pass = "";
+    // $server = "localhost";
+    // $username = "root";
+    // $pass = "";
 
-    $con = mysqli_connect($server, $username, $pass);
+    // $con = mysqli_connect($server, $username, $pass);
 
-    if (!$con) {
-        die("connection to this database failed due to" . mysqli_connect_error());
-    }
+    // if (!$con) {
+    //     die("connection to this database failed due to" . mysqli_connect_error());
+    // }
 
     $reg_no = $_POST['reg_no'];
     $user_id = $_POST['user_id'];
@@ -66,26 +100,26 @@ if (isset($_POST['reg_no'])) {
 </head>
 
 <body style="height: 840px;">
-    <?php
-    if ($flag == 1) {
-        echo "User id Not Exist !!!";
-    } else if ($flag == 2) {
-        echo "Wrong Registration Number !!!";
-    } else if ($flag == 3) {
-        if ($insert == 1) {
-            echo "<p class='submitMsg'>Thanks for joining our organisation</p>";
-        } else if ($insert == 2) {
-            echo "<p class='submitMsg'>None of the rows are affected.</p>";
-        }
-    } else if ($flag == 4) {
-        echo "Wrong Password !!!";
-    }
 
-
-    ?>
     <a href="http://localhost/Dhamni_2.0/deep/homepl.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
+    <?php
+    if ($flag == 1) {
+        echo "<p class='alertMsg'>User id Not Exist !!!</p>";
+    } else if ($flag == 2) {
+        
+        echo "<p class='alertMsg'>Wrong Registration Number !!!</p>";
+    } else if ($flag == 3) {
+        if ($insert == 1) {
+            echo "<p class='alertMsg'>Thanks for joining our organisation</p>";
+        } else if ($insert == 2) {
+            echo "<p class='alertMsg'>None of the rows are affected.</p>";
+        }
+    } else if ($flag == 4) {
+        echo "<p class='alertMsg'>Wrong Password !!!</p>";
+    }
+    ?>
     <div class="card">
         <form action="path_lab_update.php" class="box" method="post">
             <h1>Update Path Lab Details</h1>
@@ -100,17 +134,17 @@ if (isset($_POST['reg_no'])) {
             </div>
             <div>
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="name"
-                    class="form-control" id="inputName" placeholder="Name of Path Lab" required>
+                    class="form-control" id="inputName" placeholder="Name of Path Lab" value="<?php echo "$name2"?>" required>
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="number" name="contact_number"
-                    class="form-control" id="inputContact1" placeholder="Contact Number" required>
+                    class="form-control" id="inputContact1" placeholder="Contact Number" value="<?php echo "$contact_number2"?>" required>
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="email" name="email"
-                    class="form-control" id="inputEmail1" placeholder="Email">
+                    class="form-control" id="inputEmail1" placeholder="Email" value="<?php echo "$email2"?>" >
             </div>
-            <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address" required>
+            <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address" value="<?php echo "$address2"?>" required>
             <div>
-                <input type="number" name="pincode" class="form-control" id="inputPin" placeholder="Pin Code" required>
+                <input type="number" name="pincode" class="form-control" id="inputPin" placeholder="Pin Code" value="<?php echo "$pincode2"?>" required>
                 <select id="inputState" name="state" class="form-select" required>
-                    <option selected>Select State</option>
+                    <option selected><?php echo "$state2"?> </option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                     <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>

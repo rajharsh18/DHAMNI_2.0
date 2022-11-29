@@ -53,14 +53,15 @@ if (isset($_POST['fname'])) {
 </head>
 
 <body style="height: 1070px;">
-    <?php
-    if ($insert == true) {
-        echo "<p class='submitMsg'>Thanks for joining our organisation</p>";
-    }
-    ?>
+    
     <a href="http://localhost/Dhamni_2.0/deep/home.html">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
+    <?php
+    if ($insert == true) {
+        echo "<p class='cnfMsg'>Thanks for joining our Organisation</p>";
+    }
+    ?>
     <div class="card">
         <form action="donor.php" class="box" method="post">
             <h1>Donor Registration</h1>

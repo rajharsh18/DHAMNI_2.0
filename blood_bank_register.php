@@ -51,13 +51,7 @@ if (isset($_POST['reg_no'])) {
 </head>
 
 <body style="height: 840px;">
-    <?php
-    if ($insert == 1) {
-        echo "<p class='submitMsg'>Thanks for joining our organisation</p>";
-    } else if ($insert == 2) {
-        echo "ERROR: $sql <br> $con->error";
-    }
-    ?>
+    
     <a href="http://localhost/Dhamni_2.0/deep/home.html">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>

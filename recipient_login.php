@@ -33,6 +33,7 @@ if (isset($_POST['contact_number'])) {
             $name = $row['fname']." ".$row['mname']." ".$row['lname'];
             session_start();
             $_SESSION["name"] = $name;
+            $_SESSION["contact_number"] = $contact_number;
             $_SESSION[""] = true;
             header("Location: http://localhost/Dhamni_2.0/deep/homer.php");
             exit();
@@ -59,9 +60,9 @@ if (isset($_POST['contact_number'])) {
 <body>
     <?php
     if ($flag == 1) {
-        echo "User id Not Exist !!!";
+        echo "<p class='alertMsg'>User Id Not Exist !!!</p>";
     } else if ($flag == 2) {
-        echo "Wrong Password !!!";
+        echo "<p class='alertMsg'>Wrong Password !!!</p>";
     }
     ?>
     <a href="http://localhost/Dhamni_2.0/deep/home.html">

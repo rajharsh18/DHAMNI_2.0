@@ -31,6 +31,7 @@ if (isset($_POST['user_id'])) {
             $name = $row['name'];
             session_start();
             $_SESSION["name"] = $name;
+            $_SESSION["user_id"] = $user_id;
             $_SESSION[""] = true;
             header("Location: http://localhost/Dhamni_2.0/deep/homebb.php");
             exit();
@@ -56,9 +57,9 @@ if (isset($_POST['user_id'])) {
 <body>
     <?php
     if ($flag == 1) {
-        echo "User id Not Exist !!!";
+        echo "<p class='alertMsg'>User Id Not Exist !!!</p>";
     } else if ($flag == 2) {
-        echo "Wrong Password !!!";
+        echo "<p class='alertMsg'>Wrong Password !!!</p>";
     }
     ?>
     <a href="http://localhost/Dhamni_2.0/deep/home.html">

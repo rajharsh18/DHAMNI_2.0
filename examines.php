@@ -53,7 +53,7 @@ if (isset($_POST['path_lab_id'])) {
     </a>
     <?php
     if ($err == 1){
-        echo "<p align='center' class='alertmsg'>Unexpected Error Occured</p>";
+        echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     if ($insert == 1) {
         echo "<p align='center' class='cnfMsg'>Data Updated</p>";

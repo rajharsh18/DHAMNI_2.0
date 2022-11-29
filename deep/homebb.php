@@ -102,7 +102,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </header>
     <?php
     if ($err == 1){
-        echo "<p align='center' class='alertmsg'>Unexpected Error Occured</p>";
+        echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     ?>
     <div class="slider-detail">

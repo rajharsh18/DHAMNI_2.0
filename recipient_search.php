@@ -56,7 +56,7 @@ if (isset($_POST['quantity_required'])) {
     </a>
     <?php
     if ($err == 1){
-        echo "<p align='center' class='alertmsg'>Unexpected Error Occured</p>";
+        echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     ?>
     <div class="card">

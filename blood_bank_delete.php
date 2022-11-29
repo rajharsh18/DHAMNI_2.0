@@ -80,7 +80,7 @@ if ($insert == 1) {
     </a>
     <?php
     if ($err == 1){
-        echo "<p align='center' class='alertmsg'>Unexpected Error Occured</p>";
+        echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     if ($insert == 2) {
         echo "<p align='center' class='alertMsg'>Wrong Name !!!</p>";

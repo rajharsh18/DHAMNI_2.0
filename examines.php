@@ -49,7 +49,7 @@ if (isset($_POST['path_lab_id'])) {
         echo "<p class='submitMsg'>None of the rows are affected.</p>";
     }
     ?>
-    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+    <a href="http://localhost/Dhamni_2.0/deep/homepl.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <div class="card">

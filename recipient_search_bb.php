@@ -44,7 +44,7 @@ if (isset($_POST['area_pincode'])) {
 <body>
 
 
-    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+    <a href="http://localhost/Dhamni_2.0/deep/homer.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <div class="card">
@@ -63,9 +63,9 @@ if (isset($_POST['area_pincode'])) {
         if ($insert == 1) {
             // output data of each row
         
-            echo "<main style='width: 90%; margin: auto; text-align: center; position: relative; top: 500px; margin-bottom: 50px;'>";
+            echo "<main style='width: 90%; margin: auto; text-align: center; position: relative; top: 500px;'>";
             echo "<div style='text-align: center;'><p style='background-image: linear-gradient(to bottom, rgb(40, 8, 8),rgb(132, 4, 4)); border-radius:15px;color:white; display: inline-block; padding:3px 10px;font-size:1.5em;' disabled>Blood Banks</p></div>";
-            echo "<table class='table table-striped' style='margin-bottom:50px;'>
+            echo "<table class='table table-striped' >
             <thead style='color:antiquewhite;font-size:1.2em; font-family:Arial, Helvetica, sans-serif;border-radius: 5px; background-image: linear-gradient(to right, rgba(34, 57, 12,1), rgba(85, 10, 10,1));'>
                 <tr>
                 <th scope='col' style='width: 10%;margin: auto;text-align: center;'>S. No.</th>
@@ -89,12 +89,8 @@ if (isset($_POST['area_pincode'])) {
 
             echo "
                 </tbody>
-                </table>";
+                </table><br>";
         }
-        // else {
-        //     echo "$insert";
-        // }
-    
         ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"

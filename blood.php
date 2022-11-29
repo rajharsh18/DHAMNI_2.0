@@ -49,7 +49,7 @@ if (isset($_POST['reg_no'])) {
         echo "<p class='submitMsg'>None of the rows are affected.</p>";
     }
     ?>
-    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+    <a href="http://localhost/Dhamni_2.0/deep/homebb.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <div class="card">

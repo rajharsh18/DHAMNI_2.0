@@ -42,7 +42,7 @@ if (isset($_POST['reg_no'])) {
         echo "<p class='submitMsg'>Thanks for joining our organisation</p>";
     }
     ?>
-    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+    <a href="http://localhost/Dhamni_2.0/deep/homepl.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <div class="card">

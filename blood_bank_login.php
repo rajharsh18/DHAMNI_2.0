@@ -65,7 +65,7 @@ if (isset($_POST['user_id'])) {
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <div class="card">
-        <form action="path_lab_login.php" class="box" method="post">
+        <form action="blood_bank_login.php" class="box" method="post">
             <h1>Blood Bank</h1>
             <p class="text-muted"> Please enter your login and password!</p>
             <input type="text" name="user_id" class="form-control" id="inputUserid" placeholder="User Name" required>

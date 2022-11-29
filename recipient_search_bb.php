@@ -1,29 +1,27 @@
-
 <?php
-$insert= 0;
+$insert = 0;
 $result = 0;
-if(isset($_POST['area_pincode'])){
+if (isset($_POST['area_pincode'])) {
     $server = "localhost";
     $username = "root";
     $pass = "";
 
     $con = mysqli_connect($server, $username, $pass);
 
-    if(!$con){
+    if (!$con) {
         die("connection to this database failed due to" . mysqli_connect_error());
     }
 
-    $area_pincode= $_POST['area_pincode'];
+    $area_pincode = $_POST['area_pincode'];
     $insert = 0;
 
     $sql = "SELECT Name,contact_number,email from `dhamni`.`blood_bank` WHERE Pincode = '$area_pincode';";
 
-    if($con->query($sql) == true){
+    if ($con->query($sql) == true) {
         $insert = 1;
         $result = $con->query($sql);
-    }
-    else{
-        $insert=2;
+    } else {
+        $insert = 2;
         echo "ERROR: $sql <br> $con->error";
     }
 
@@ -40,38 +38,34 @@ if(isset($_POST['area_pincode'])){
     <title>Blood Bank Search Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="login.css">
 </head>
 
-<body style="overflow-x: hidden;">
-    <header>
-        <nav class="navbar" style="background-color: #f00000;">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/recipient_search_bb.php" style="color: white; margin: auto; font-size: 1.8em;">
-                    Blood Bank Search Form
-                </a>
-            </div>
-        </nav>
-    </header>
+<body>
 
-    <main>
-        <form class="row g-3" style="padding: 5%;" action="recipient_search_bb.php" method="post">
 
-            <div class="col-md-4">
-                <label for="inputAPin" class="form-label">Area Pin Code</label>
-                <input type="number" name="area_pincode" class="form-control" id="inputPin" required>
-            </div>
-            
-            <div class="col-12" style="text-align: center;" >
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
+    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+        <img src="home.png" alt="home" style="width: 3.5%;" id="home">
+    </a>
+    <div class="card">
+        <form action="recipient_search_bb.php" class="box" method="post">
+            <h1>Recipient Search</h1>
+            <p class="text-muted"> Please Enter Blood Details</p>
+            <input
+                style="border: 0;background: none;display: block;margin: 20px auto;text-align: center;border: 2px solid #3498db;padding: 10px 10px;width: 250px;outline: none;color: rgb(148, 163, 165);border-radius: 24px;transition: 0.25s"
+                type="number" name="area_pincode" class="form-control" id="inputPin" placeholder="Area Pin Code"
+                required>
+
+            <button type="submit" class="btn-submit">Search</button>
         </form>
-        <?php
+    </div>
+    <?php
         if ($insert == 1) {
             // output data of each row
-            
-            echo "<main style='width: 90%; margin: auto; text-align: center;>";
+        
+            echo "<main style='width: 90%; margin: auto; text-align: center; position: relative; top: 500px; margin-bottom: 50px;'>";
             echo "<div style='text-align: center;'><p style='background-image: linear-gradient(to bottom, rgb(40, 8, 8),rgb(132, 4, 4)); border-radius:15px;color:white; display: inline-block; padding:3px 10px;font-size:1.5em;' disabled>Blood Banks</p></div>";
-            echo "<table class='table table-striped' >
+            echo "<table class='table table-striped' style='margin-bottom:50px;'>
             <thead style='color:antiquewhite;font-size:1.2em; font-family:Arial, Helvetica, sans-serif;border-radius: 5px; background-image: linear-gradient(to right, rgba(34, 57, 12,1), rgba(85, 10, 10,1));'>
                 <tr>
                 <th scope='col' style='width: 10%;margin: auto;text-align: center;'>S. No.</th>
@@ -82,28 +76,26 @@ if(isset($_POST['area_pincode'])){
             </thead>
             <tbody style='color:rgb(27, 25, 22); font-family: Arial, Helvetica, sans-serif;border-radius: 5px; background-image: linear-gradient(to right, rgba(163, 228, 150, 0.836), rgba(198, 172, 116, 0.795));''>";
             $code = 1;
-                while($row = mysqli_fetch_array($result)){
+            while ($row = mysqli_fetch_array($result)) {
 
-                    echo "<tr>";
-                    echo "<td style='width: 10%;margin: auto;text-align: center; font-weight: bold;'>$code</td>";
-                    echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['Name'] . "</td>";
-                    echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['contact_number'] . "</td>";
-                    echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['email'] . "</td>";
-                    echo "</tr>";
-                    $code = $code + 1;
-                }
-
-                echo "
-                </tbody>
-                </table>
-                </main>";      
+                echo "<tr>";
+                echo "<td style='width: 10%;margin: auto;text-align: center; font-weight: bold;'>$code</td>";
+                echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['Name'] . "</td>";
+                echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['contact_number'] . "</td>";
+                echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['email'] . "</td>";
+                echo "</tr>";
+                $code = $code + 1;
             }
-            // else {
-            //     echo "$insert";
-            // }
-                
-    ?>
-    </main>
+
+            echo "
+                </tbody>
+                </table>";
+        }
+        // else {
+        //     echo "$insert";
+        // }
+    
+        ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>

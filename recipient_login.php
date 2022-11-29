@@ -68,7 +68,7 @@ if (isset($_POST['contact_number'])) {
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <div class="card">
-        <form action="path_lab_login.php" class="box" method="post">
+        <form action="recipient_login.php" class="box" method="post">
             <h1>Recipient</h1>
             <p class="text-muted"> Please enter your contact number and password!</p>
             <input type="text" name="contact_number" class="form-control" id="inputContactNumber"

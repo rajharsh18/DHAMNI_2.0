@@ -1,14 +1,13 @@
-
 <?php
 $insert = 0;
-if(isset($_POST['reg_no'])){
+if (isset($_POST['reg_no'])) {
     $server = "localhost";
     $username = "root";
     $pass = "";
 
     $con = mysqli_connect($server, $username, $pass);
 
-    if(!$con){
+    if (!$con) {
         die("connection to this database failed due to" . mysqli_connect_error());
     }
 
@@ -16,10 +15,9 @@ if(isset($_POST['reg_no'])){
     $name = $_POST['name'];
     $sql = "DELETE FROM `dhamni`.`blood_bank` WHERE '$reg_no' = `Reg_no` and '$name' = `name`";
 
-    if($con->query($sql) == true){
+    if ($con->query($sql) == true) {
         $insert = true;
-    }
-    else{
+    } else {
         echo "ERROR: $sql <br> $con->error";
     }
 
@@ -36,39 +34,27 @@ if(isset($_POST['reg_no'])){
     <title>Delete Blood-Bank Information</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="login.css">
 </head>
 
 <body style="overflow-x: hidden;">
-    <header>
-        <nav class="navbar" style="background-color: #f00000;">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/blood_bank_delete.php" style="color: white; margin: auto; font-size: 1.8em;">
-                    Delete Blood-Bank Information
-                </a>
-            </div>
-        </nav>
-    </header>
     <?php
-        if($insert == true){
+    if ($insert == true) {
         echo "<p class='submitMsg'>Thanks for joining our organisation</p>";
-        }
+    }
     ?>
-    <main>
-        <form class="row g-3" style="padding: 5%;" action="blood_bank_delete.php" method="post">
-
-            <div class="col-md-6">
-                <label for="inputReg" class="form-label">Registration Number</label>
-                <input type="text" name="reg_no" class="form-control" id="inputReg" required>
-            </div>
-            <div class="col-6">
-                <label for="inputName" class="form-label">Name of Path Lab</label>
-                <input type="text" name="name" class="form-control" id="inputName" required>
-            </div>
-            <div class="col-12" style="text-align: center;" >
-                <button type="submit" class="btn btn-primary">Delete</button>
-            </div>
+    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+        <img src="home.png" alt="home" style="width: 3.5%;" id="home">
+    </a>
+    <div class="card">
+        <form action="blood_bank_delete.php" class="box" method="post">
+            <h1>Blood Bank Delete</h1>
+            <p class="text-muted"> Please enter your Registration Number and Name</p>
+            <input type="text" name="reg_no" class="form-control" id="inputReg" placeholder="Registration Number" required>
+            <input type="text" name="name" class="form-control" id="inputName" placeholder="Name of Blood Bank" required>
+            <button type="submit" class="btn-submit">Delete</button>
         </form>
-    </main>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>

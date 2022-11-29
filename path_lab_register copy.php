@@ -1,12 +1,14 @@
+
 <?php
 $insert = 0;
-if (isset($_POST['reg_no'])) {
+if(isset($_POST['reg_no'])){
     $server = "localhost";
     $username = "root";
     $pass = "";
 
     $con = mysqli_connect($server, $username, $pass);
-    if (!$con) {
+
+    if(!$con){
         die("connection to this database failed due to" . mysqli_connect_error());
     }
 
@@ -19,20 +21,19 @@ if (isset($_POST['reg_no'])) {
     $state = $_POST['state'];
     $contact_number = $_POST['contact_number'];
     $email = $_POST['email'];
-    $sql = "INSERT INTO `dhamni`.`blood_bank` (`reg_no`, `user_id`, `password`, `name`, `address`, `pincode`,`state`, `contact_number`, `email`) VALUES ('$reg_no', '$user_id', '$password', '$name', '$address', '$pincode','$state' , '$contact_number', '$email')";
-    $sql2 = "INSERT INTO `dhamni`.`blood` (`Blood_bank_id`, `Blood_group`, `Quantity`) VALUES ('$reg_no', 'A +', '0'), ('$reg_no', 'A -', '0'), ('$reg_no', 'B +', '0'), ('$reg_no', 'B -', '0'), ('$reg_no', 'AB +', '0'), ('$reg_no', 'AB -', '0'), ('$reg_no', 'O +', '0'), ('$reg_no', 'O -', '0');";
+    $sql = "INSERT INTO `dhamni`.`path_lab` (`reg_no`, `user_id`,`password`, `name`, `address`, `pincode`,`state`, `contact_number`, `email`) VALUES ('$reg_no', '$user_id', '$password', '$name', '$address', '$pincode', '$state', '$contact_number', '$email')";
 
-    if ($con->query($sql) == true) {
-        $result = $con->query($sql2);
+    if($con->query($sql) == 1){
         $insert = 1;
-    } else {
-        $insert = 2;
+    }
+    else{
+        $insert=2;
         echo "ERROR: $sql <br> $con->error";
     }
     $con->close();
 
-    if ($insert == 1) {
-        header("Location: http://localhost/Dhamni_2.0/blood_bank_login.php");
+    if ($insert == 1){
+        header("Location: http://localhost/Dhamni_2.0/path_lab_login.php");
         exit();
     }
 }
@@ -44,40 +45,61 @@ if (isset($_POST['reg_no'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Blood Bank Registration</title>
+    <title>Path Lab Registration</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="register.css">
 </head>
 
-<body style="height: 840px;">
-    <?php
-    if ($insert == 1) {
-        echo "<p class='submitMsg'>Thanks for joining our organisation</p>";
-    } else if ($insert == 2) {
-        echo "ERROR: $sql <br> $con->error";
-    }
-    ?>
-    <a href="http://localhost/Dhamni_2.0/deep/home.html">
-        <img src="home.png" alt="home" style="width: 3.5%;" id="home">
-    </a>
-    <div class="card">
-        <form action="blood_bank_register.php" class="box" method="post">
-            <h1>Blood Bank Registration</h1>
-            <p class="text-muted"> Please enter your details here</p>
-            <div>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="user_id" class="form-control" id="inputUserId" placeholder="User ID" required>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" required>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="reg_no" class="form-control" id="inputReg" placeholder="Registration Number" required>
+<body style="overflow-x: hidden;">
+    <header>
+        <nav class="navbar" style="background-color: #f00000;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="http://localhost/Dhamni_2.0/path_lab_register.php" style="color: white; margin: auto; font-size: 1.8em;">
+                    Path-Lab Registration Form
+                </a>
             </div>
-            <div>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="name" class="form-control" id="inputName" placeholder="Name of Path Lab" required>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="number" name="contact_number" class="form-control" id="inputContact1" placeholder="Contact Number" required>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="email" name="email" class="form-control" id="inputEmail1" placeholder="Email" >
+        </nav>
+    </header>
+    <main>
+        <form class="row g-3" style="padding: 5%;" action="path_lab_register.php" method="post">
+            <div class="col-md-6">
+                <label for="inputUserId" class="form-label">User ID</label>
+                <input type="text" name="user_id" class="form-control" id="inputUserId" required>
             </div>
-            <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address" required >
-            <div>
-                <input type="number" name="pincode" class="form-control" id="inputPin" placeholder="Pin Code" required>
+            <div class="col-md-6">
+                <label for="inputPassword" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="inputPassword" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="inputReg" class="form-label">Registration Number</label>
+                <input type="text" name="reg_no" class="form-control" id="inputReg" required>
+            </div>
+            <div class="col-6">
+                <label for="inputName" class="form-label">Name of Path Lab</label>
+                <input type="text" name="name" class="form-control" id="inputName" required>
+            </div>
+            
+
+            <div class="col-md-6">
+                <label for="inputContact" class="form-label">Contact Number</label>
+                <input type="number" name="contact_number" class="form-control" id="inputContact" required>
+            </div>
+            
+            <div class="col-md-6">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="inputEmail">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Address</label>
+                <input type="text" name="address" class="form-control" id="inputAddress" required>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPin" class="form-label">Pin Code</label>
+                <input type="number" name="pincode" class="form-control" id="inputPin" required>
+            </div>
+            <div class="col-md-6">
+                <label for="inputState" class="form-label">State</label>
                 <select id="inputState" name="state" class="form-select" required>
                     <option selected>Select State</option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -118,12 +140,17 @@ if (isset($_POST['reg_no'])) {
                     <option value="West Bengal">West Bengal</option>
                 </select>
             </div>
-            <button type="submit" class="btn-submit">Register</button>
-            <label class="form-label" style="color: antiquewhite">Already an user?
-                <a href="http://localhost/Dhamni_2.0/blood_bank_login.php">Log In as a Blood Bank</a>
+            <div class="col-12" style="text-align: center;" >
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+            <div style="text-align: center;">
+        <label class="form-label" for="typePasswordX-2" >Alredy a Member? 
+            <a href="http://localhost/Dhamni_2.0/path_lab_login.php">Sign in as a Path Lab</a>
             </label>
+        </div>
         </form>
-    </div>
+        
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>

@@ -52,7 +52,7 @@ if (isset($_POST['fname'])) {
     <link rel="stylesheet" href="register.css">
 </head>
 
-<body>
+<body style="height: 1070px;">
     <?php
     if ($insert == true) {
         echo "<p class='submitMsg'>Thanks for joining our organisation</p>";

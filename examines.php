@@ -24,8 +24,6 @@ if (isset($_POST['path_lab_id'])) {
         if (mysqli_affected_rows($con) == 0) {
             $insert = 2;
         }
-    } else {
-        echo "ERROR: $sql <br> $con->error";
     }
     $con->close();
 }
@@ -48,7 +46,7 @@ if (isset($_POST['path_lab_id'])) {
 
 <body style="overflow-x: hidden;">
     
-    <a href="http://localhost/Dhamni_2.0/deep/homepl.php">
+    <a href="http://localhost/Dhamni_2.0/homepl.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php

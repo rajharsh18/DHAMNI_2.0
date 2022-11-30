@@ -34,8 +34,6 @@ if (isset($_POST['fname'])) {
 
     if ($con->query($sql) == true) {
         $insert = true;
-    } else {
-        echo "ERROR: $sql <br> $con->error";
     }
 
     $con->close();
@@ -60,7 +58,7 @@ if (isset($_POST['fname'])) {
 
 <body style="height: 1070px;">
     
-    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+    <a href="http://localhost/Dhamni_2.0/index.html">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php

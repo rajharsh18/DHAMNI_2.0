@@ -24,8 +24,6 @@ $sql2 = "SELECT name, address, pincode, state, contact_number, email FROM `dhamn
 if ($con->query($sql2) == true) {
     $result2 = $con->query($sql2);
     // $row2 = mysqli_fetch_array($result2);
-} else {
-    echo "ERROR: $sql <br> $con->error";
 }
 $row2 = mysqli_fetch_array($result2);
 $name2 = $row2['name'];
@@ -57,9 +55,8 @@ if (isset($_POST['reg_no'])) {
         if (mysqli_affected_rows($con) == 0) {
             $insert = 2;
         }
-    } else {
-        echo "ERROR: $sql <br> $con->error";
     }
+
 
     if ($result->num_rows == 0) {
         $flag = 1;
@@ -70,6 +67,7 @@ if (isset($_POST['reg_no'])) {
             } else if ($reg_no == $row["reg_no"]) {
                 $flag = 3;
                 $con->query($sql1);
+                $_SESSION["name"] = $name;
             }
         } else if ($insert == 1 && $password != $row["password"]) {
             $flag = 4;
@@ -96,7 +94,7 @@ if (isset($_POST['reg_no'])) {
 
 <body style="height: 840px;">
 
-    <a href="http://localhost/Dhamni_2.0/deep/homepl.php">
+    <a href="http://localhost/Dhamni_2.0/homepl.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
@@ -104,13 +102,13 @@ if (isset($_POST['reg_no'])) {
         echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     if ($flag == 1) {
-        echo "<p align='center' class='alertMsg'>User id Not Exist !!!</p>";
+        echo "<p align='center' class='alertMsg'>User Not Exist !!!</p>";
     } else if ($flag == 2) {
-
+        
         echo "<p align='center' class='alertMsg'>Wrong Registration Number !!!</p>";
     } else if ($flag == 3) {
         if ($insert == 1) {
-            echo "<p align='center' class='alertMsg'>Thanks for joining our organisation</p>";
+            echo "<p align='center' class='cnfMsg'>Updated Database</p>";
         } else if ($insert == 2) {
             echo "<p align='center' class='alertMsg'>None of the rows are affected.</p>";
         }

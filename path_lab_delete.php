@@ -19,8 +19,6 @@ $check = $_SESSION['name'];
 $sql = "SELECT name, reg_no FROM `dhamni`.`path_lab` WHERE `name` = '$check'";
 if ($con->query($sql) == true) {
     $result = $con->query($sql);
-} else {
-    echo "ERROR: $sql <br> $con->error";
 }
 $row = mysqli_fetch_array($result);
 $name2 = $row['name'];
@@ -50,7 +48,7 @@ if ($insert == 1) {
     // session_start();
     $_SESSION = array();
     session_destroy();
-    header("location: http://localhost/Dhamni_2.0/deep/home.html");
+    header("location: http://localhost/Dhamni_2.0/index.html");
     exit();
 }
 } catch (Throwable $e) {
@@ -71,7 +69,7 @@ if ($insert == 1) {
 </head>
 
 <body style="overflow-x: hidden;">
-    <a href="http://localhost/Dhamni_2.0/deep/homepl.php">
+    <a href="http://localhost/Dhamni_2.0/homepl.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php

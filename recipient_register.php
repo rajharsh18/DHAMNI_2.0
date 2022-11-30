@@ -60,7 +60,7 @@ if(isset($_POST['fname'])){
 </head>
 
 <body style="height:930px;">
-<a href="http://localhost/Dhamni_2.0/deep/home.html">
+<a href="http://localhost/Dhamni_2.0/index.html">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php

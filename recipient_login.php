@@ -25,7 +25,6 @@ if (isset($_POST['contact_number'])) {
         $insert = 1;
     } else {
         $insert = 2;
-        echo "ERROR: $sql <br> $con->error";
     }
     $con->close();
     if ($result->num_rows == 0) {
@@ -37,7 +36,7 @@ if (isset($_POST['contact_number'])) {
             $_SESSION["name"] = $name;
             $_SESSION["contact_number"] = $contact_number;
             $_SESSION[""] = true;
-            header("Location: http://localhost/Dhamni_2.0/deep/homer.php");
+            header("Location: http://localhost/Dhamni_2.0/homer.php");
             exit();
         } else if ($insert == 1 && $password != $row["password"]) {
             $flag = 2;
@@ -64,7 +63,7 @@ if (isset($_POST['contact_number'])) {
 
 <body>
     
-    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+    <a href="http://localhost/Dhamni_2.0/index.html">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php

@@ -38,7 +38,7 @@ if (isset($_POST['user_id'])) {
             $_SESSION["name"] = $name;
             $_SESSION["user_id"] = $user_id;
             $_SESSION[""] = true;
-            header("Location: http://localhost/Dhamni_2.0/deep/homepl.php");
+            header("Location: http://localhost/Dhamni_2.0/homepl.php");
             exit();
         } else if ($insert == 1 && $password != $row["password"]) {
             $flag = 2;
@@ -65,7 +65,7 @@ if (isset($_POST['user_id'])) {
 
 <body>
 
-    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+    <a href="http://localhost/Dhamni_2.0/index.html">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php

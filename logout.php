@@ -3,6 +3,6 @@
 session_start();
 $_SESSION = array();
 session_destroy();
-header("location: http://localhost/Dhamni_2.0/deep/home.html");
+header("location: http://localhost/Dhamni_2.0/index.html");
 
 ?>

@@ -24,8 +24,6 @@ if (isset($_POST['reg_no'])) {
         if (mysqli_affected_rows($con) == 0) {
             $insert = 2;
         }
-    } else {
-        echo "ERROR: $sql <br> $con->error";
     }
     $con->close();
 }
@@ -48,7 +46,7 @@ if (isset($_POST['reg_no'])) {
 
 <body style="height: 700px;">
     
-    <a href="http://localhost/Dhamni_2.0/deep/homebb.php">
+    <a href="http://localhost/Dhamni_2.0/homebb.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
@@ -70,7 +68,7 @@ if (isset($_POST['reg_no'])) {
             <select
                 style="border: 0;background: none;display: block;margin: 20px auto;text-align: center;border: 2px solid #3498db;padding: 10px 10px;width: 250px;outline: none;color: rgb(148, 163, 165);border-radius: 24px;transition: 0.25s"
                 id="inputReq_BG" name="blood_group" class="form-select" required>
-                <option selected>Required Blood Group</option>
+                <option selected>Blood Group</option>
                 <option style="color: black;" value="A +">A +</option>
                 <option style="color: black;" value="A -">A -</option>
                 <option style="color: black;" value="B +">B +</option>

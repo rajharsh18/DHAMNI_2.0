@@ -49,7 +49,7 @@ if (isset($_POST['area_pincode'])) {
 <body>
 
 
-    <a href="http://localhost/Dhamni_2.0/deep/homer.php">
+    <a href="http://localhost/Dhamni_2.0/homer.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php

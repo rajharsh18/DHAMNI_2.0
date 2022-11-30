@@ -13,21 +13,18 @@ if (!$con) {
 session_start();
 $name = 'a';
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    $user_id = $_SESSION['user_id'];
-    $sql = "SELECT name FROM `dhamni`.`blood_bank` WHERE `user_id` = '$user_id'";
-    $result = $con->query($sql);
-    $row = mysqli_fetch_array($result);
-    $name = $row['name'];
+    $name = $_SESSION['name'];
+    // $sql = "SELECT fname, mname, lname FROM `dhamni`.`recipient` WHERE `name` = '$name'";
+    // $result = $con->query($sql);
+    // $row = mysqli_fetch_array($result);
+    // $name = $row['fname']." ".$row['mname']." ".$row['lname'];
 }
 } catch (Throwable $e) {
     $err = 1;
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,7 +39,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <header class="continer-fluid ">
         <div id="menu-jk" class="header-bottom">
@@ -63,28 +59,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="nav-item">
-                                            <a class="nav-link active" aria-current="page" href="#">Blood Bank</a>
+                                            <a class="nav-link active" aria-current="page" href="http://localhost/Dhamni_2.0/homer.php">Recipient</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">About Us</a>
+                                            <a class="nav-link" href="http://localhost/Dhamni_2.0/about_usr.php">About Us</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false" id="anchor-id">
-                                                <?php echo "Welcome " . $name ?>
+                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false" id="anchor-id"> <?php echo "Welcome ".$_SESSION['name']?>
                                             </a>
-                                            <!-- ebjkfk -->
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item"
-                                                        href="http://localhost/Dhamni_2.0/blood_bank_update.php">Blood
-                                                        Bank Update</a>
+                                                        href="http://localhost/Dhamni_2.0/recipient_search.php">Search by Blood Group</a>
                                                 </li>
                                                 <li><a class="dropdown-item"
-                                                        href="http://localhost/Dhamni_2.0/blood.php">Update Blood
-                                                        Quantity</a></li>
-                                                <li><a class="dropdown-item"
-                                                        href="http://localhost/Dhamni_2.0/blood_bank_delete.php">Blood
-                                                        Bank Delete</a></li>
+                                                        href="http://localhost/Dhamni_2.0/recipient_search_bb.php">Search Blood Bank</a>
+                                                </li>
                                             </ul>
                                         </li>
                                         <li class="nav-item">
@@ -118,8 +108,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <img class="d-block w-100" src="assets/images/slider/slide-02.jpg" alt="First slide">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 class=" bounceInDown">Donate Blood & Save a Life</h5>
-                        <p class=" bounceInLeft">To give blood you need neither extra strength nor extra food, and you
-                            will save a life.</p>
+                        <p class=" bounceInLeft">To give blood you need neither extra strength nor extra food, and you will save a life.</p>
 
                         <div class=" vbh">
 
@@ -133,9 +122,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <img class="d-block w-100" src="assets/images/slider/slide-03.jpg" alt="Third slide">
                     <div class="carousel-caption vdg-cur d-none d-md-block">
                         <h5 class=" bounceInDown">Donate Blood & Save a Life</h5>
-                        <p class=" bounceInLeft">Donating blood is the kindest act we all can do. If you have donated
-                            blood then you are a rock star. You will not lose anything by donating blood but someone
-                            somewhere will get blessed.</p>
+                        <p class=" bounceInLeft">Donating blood is the kindest act we all can do. If you have donated blood then you are a rock star. You will not lose anything by donating blood but someone somewhere will get blessed.</p>
 
                         <div class=" vbh">
 
@@ -160,7 +147,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </div>
     <footer id="contact" class="container-fluid">
         <div class="container">
-
+            
             <div class="row content-ro">
                 <div class="col-lg-4 col-md-12 footer-contact">
                     <h2>Contact Informatins</h2>
@@ -190,29 +177,29 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12 footer-links">
-                    <div class="row no-margin mt-2">
-                        <h2>Quick Links</h2>
-                        <ul>
-                            <li>Home</li>
-                            <li>About Us</li>
-                            <li>Contacts</li>
-                            <li>Pricing</li>
-                            <li>Gallery</li>
-                            <li>eatures</li>
+                   <div class="row no-margin mt-2">
+                    <h2>Quick Links</h2>
+                    <ul>
+                        <li>Home</li>
+                        <li>About Us</li>
+                        <li>Contacts</li>
+                        <li>Pricing</li>
+                        <li>Gallery</li>
+                        <li>eatures</li>
 
-                        </ul>
+                    </ul>
                     </div>
-                    <div class="row no-margin mt-1">
-                        <h2 class="m-t-2">More Products</h2>
-                        <ul>
-                            <li>Forum PHP Script</li>
-                            <li>Edu Smart</li>
-                            <li>Smart Event</li>
-                            <li>Smart School</li>
+                   <div class="row no-margin mt-1">
+                       <h2 class="m-t-2">More Products</h2>
+                     <ul>
+                        <li>Forum PHP Script</li>
+                        <li>Edu Smart</li>
+                        <li>Smart Event</li>
+                        <li>Smart School</li>
 
 
-                        </ul>
-                    </div>
+                    </ul>
+                   </div>
 
                 </div>
                 <div class="col-lg-4 col-md-12 footer-form">
@@ -233,8 +220,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="footer-copy">
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
-                        <p>Copyright © <a href="https://www.smarteyeapps.com">Smarteyeapps.com</a> | All right reserved.
-                        </p>
+                        <p>Copyright © <a href="https://www.smarteyeapps.com">Smarteyeapps.com</a> | All right reserved.</p>
                     </div>
                     <div class="col-lg-4 col-md-6 socila-link">
                         <ul>
@@ -257,5 +243,4 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         crossorigin="anonymous"></script>
 
 </body>
-
 </html>

@@ -27,9 +27,6 @@ if (isset($_POST['reg_no'])) {
     if ($con->query($sql) == true) {
         $result = $con->query($sql2);
         $insert = 1;
-    } else {
-        $insert = 2;
-        echo "ERROR: $sql <br> $con->error";
     }
     $con->close();
 
@@ -57,7 +54,7 @@ if (isset($_POST['reg_no'])) {
 
 <body style="height: 840px;">
     
-    <a href="http://localhost/Dhamni_2.0/deep/home.html">
+    <a href="http://localhost/Dhamni_2.0/index.html">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php

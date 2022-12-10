@@ -129,13 +129,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             
             <div class="row content-ro">
                 <div class="col-lg-4 col-md-12 footer-contact">
-                    <h2>Contact Informatins</h2>
+                    <h2>Contact Informations</h2>
                     <div class="address-row">
                         <div class="icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="detail">
-                            <p>46-29 Indra Street, Southernbank, Tigaione, Toranto, 3006 Canada</p>
+                            <p>Cluster Innovation Centre, University of Delhi</p>
                         </div>
                     </div>
                     <div class="address-row">
@@ -143,7 +143,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <i class="far fa-envelope"></i>
                         </div>
                         <div class="detail">
-                            <p>sales@smarteyeapps.com <br> support@smarteyeapps.com</p>
+                            <p>dhamni.cic@gmail.com </p>
                         </div>
                     </div>
                     <div class="address-row">
@@ -151,7 +151,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <i class="fas fa-phone"></i>
                         </div>
                         <div class="detail">
-                            <p>+91 9751791203 <br> +91 9159669599</p>
+                            <p>+91 9971107412 <br> +91 8765649461</p>
                         </div>
                     </div>
                 </div>
@@ -161,25 +161,33 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <ul>
                         <li>Home</li>
                         <li>About Us</li>
-                        <li>Contacts</li>
-                        <li>Pricing</li>
-                        <li>Gallery</li>
-                        <li>eatures</li>
+                        <li class="dropdown" style="padding: 0; text-align: left;">
+                            <a class="dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style=" color:white; padding: 0%;">
+                                Register As
+                            </a>
+                            <ul class="dropdown-menu" >
+                                <li ><a class="dropdown-item" href="http://localhost/Dhamni_2.0/donor.php" style="display: block; padding: 0;">Donor</a></li><br>
+                                <li><a class="dropdown-item" href="http://localhost/Dhamni_2.0/blood_bank_register.php" style="display: block; padding: 0;">Blood Bank</a></li><br>
+                                <li><a class="dropdown-item" href="http://localhost/Dhamni_2.0/path_lab_register.php"style="display: block; padding: 0;">Path Lab</a></li><br>
+                                <li><a class="dropdown-item" href="http://localhost/Dhamni_2.0/recipient_register.php" style="display: block; padding: 0;">Recepient</a></li><br>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" style="padding: 0%; text-align: left;">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style=" color:white; padding: 0%;">
+                                Login As
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li style="display: block;"><a class="dropdown-item" href="http://localhost/Dhamni_2.0/blood_bank_login.php" style="display: block; padding: 0;">Blood Bank</a></li><br>
+                                <li style="display: block;"><a class="dropdown-item" href="http://localhost/Dhamni_2.0/path_lab_login.php" style="display: block; padding: 0;">Path Lab</a></li><br>
+                                <li style="display: block;"><a class="dropdown-item" href="http://localhost/Dhamni_2.0/recipient_login.php" style="display: block; padding: 0;">Recepient</a></li>
+                            </ul>
+                        </li>
 
                     </ul>
                     </div>
-                   <div class="row no-margin mt-1">
-                       <h2 class="m-t-2">More Products</h2>
-                     <ul>
-                        <li>Forum PHP Script</li>
-                        <li>Edu Smart</li>
-                        <li>Smart Event</li>
-                        <li>Smart School</li>
-
-
-                    </ul>
-                   </div>
-
+                   
                 </div>
                 <div class="col-lg-4 col-md-12 footer-form">
                     <div class="form-card">
@@ -199,7 +207,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="footer-copy">
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
-                        <p>Copyright © <a href="https://www.smarteyeapps.com">Smarteyeapps.com</a> | All right reserved.</p>
+                        <p>Copyright © <a></a> | All right reserved.</p>
                     </div>
                     <div class="col-lg-4 col-md-6 socila-link">
                         <ul>

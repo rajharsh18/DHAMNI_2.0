@@ -41,6 +41,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <link rel="stylesheet" href="assets/plugins/grid-gallery/css/grid-gallery.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="logo1.ico">
 </head>
 
 <body>

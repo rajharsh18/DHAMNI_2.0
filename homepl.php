@@ -12,18 +12,8 @@ if (!$con) {
 }
 session_start();
 
-// $name = 'a';
-// $user_id = $_SESSION['user_id'];
-// $sql = "SELECT name FROM `dhamni`.`path_lab` WHERE `user_id` = '$user_id'";
-// $result = $con->query($sql);
-// $row = mysqli_fetch_array($result);
-// $name = $row['name'];
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     $name = $_SESSION['name'];
-    // $sql = "SELECT name FROM `dhamni`.`path_lab` WHERE `user_id` = '$user_id'";
-    // $result = $con->query($sql);
-    // $row = mysqli_fetch_array($result);
-    // $name = $row['name'];
 }
 } catch (Throwable $e) {
     $err = 1;
@@ -45,6 +35,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <link rel="stylesheet" href="assets/plugins/grid-gallery/css/grid-gallery.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="logo1.ico">
 </head>
 
 <body>

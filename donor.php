@@ -1,7 +1,7 @@
 <?php
 $err = 0;
 try {
-    $insert = false;
+    $insert = 0;
     if (isset($_POST['fname'])) {
         $server = "localhost";
         $username = "root";
@@ -35,7 +35,7 @@ try {
         $sql = "INSERT INTO `dhamni`.`donor` (`Fname`, `Mname`, `Lname`, `Unique_id`, `Bdate`, `Sex`, `Contact_Number`, `Email`, `Address`, `Pincode`, `State`, `Blood_group`, `Weight`, `Iron_content`, `High_blood_pressure`, `Low_blood_pressure`, `Haemoglobin`) VALUES ('$fname', '$mname', '$lname', '$unique_id', '$bdate', '$sex', '$contact_number', '$email', '$address', '$pincode', '$state', '$blood_group', '$weight', '$iron_content', '$high_blood_pressure', '$low_blood_pressure', '$haemoglobin');";
 
         if ($con->query($sql) == true) {
-            $insert = true;
+            $insert = 1;
         }
 
         $con->close();
@@ -68,8 +68,9 @@ try {
     if ($err == 1) {
         echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
-    if ($insert == true) {
+    if ($insert == 1) {
         echo "<p align='center' class='cnfMsg'>Thanks for joining our Organisation</p>";
+        echo "<p align='center' class='cnfMsg'>You Reference-Id is: "; echo $fname; echo $unique_id; echo"</p>";
     }
     ?>
     <div class="card">

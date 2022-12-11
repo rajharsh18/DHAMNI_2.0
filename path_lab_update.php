@@ -1,80 +1,82 @@
 <?php
 $err = 0;
-try{
-$insert = 0;
-$flag = 0;
-$result2 = 0;
+try {
+    $insert = 0;
+    $flag = 0;
+    $result2 = 0;
 
-$server = "localhost";
-$username = "root";
-$pass = "";
-$con = mysqli_connect($server, $username, $pass);
-if (!$con) {
-    die("connection to this database failed due to" . mysqli_connect_error());
-}
-session_start();
+    $server = "localhost";
+    $username = "root";
+    $pass = "";
+    $db = "dhamni";
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // header("location: login.php");
-}
+    $con = mysqli_connect($server, $username, $pass, $db);
+    if (!$con) {
+        die("connection to this database failed due to" . mysqli_connect_error());
+    }
+    session_start();
 
-$check = $_SESSION['user_id'];
-$sql2 = "SELECT name, address, pincode, state, contact_number, email FROM `dhamni`.`path_lab` WHERE `user_id` = '$check';";
-
-if ($con->query($sql2) == true) {
-    $result2 = $con->query($sql2);
-    // $row2 = mysqli_fetch_array($result2);
-}
-$row2 = mysqli_fetch_array($result2);
-$name2 = $row2['name'];
-$address2 = $row2['address'];
-$pincode2 = $row2['pincode'];
-$state2 = $row2['state'];
-$contact_number2 = $row2['contact_number'];
-$email2 = $row2['email'];
-
-
-if (isset($_POST['reg_no'])) {
-
-    $reg_no = $_POST['reg_no'];
-    $user_id = $_POST['user_id'];
-    $password = $_POST['password'];
-    $name = $_POST['name'];
-    $address = $_POST['address'];
-    $pincode = $_POST['pincode'];
-    $state = $_POST['state'];
-    $contact_number = $_POST['contact_number'];
-    $email = $_POST['email'];
-    $sql1 = "UPDATE `dhamni`.`path_lab` SET `Name` = '$name', `Address` = '$address', `Pincode` = '$pincode', `Contact_Number` = '$contact_number', `Email` = '$email', `state`='$state' WHERE `Reg_no` = '$reg_no' AND `user_id` = '$user_id' AND `password`='$password';";
-    $sql = "SELECT password, reg_no FROM `dhamni`.`path_lab` WHERE `user_id` = '$user_id';";
-
-    if ($con->query($sql) == true) {
-        $result = $con->query($sql);
-        $row = mysqli_fetch_array($result);
-        $insert = 1;
-        if (mysqli_affected_rows($con) == 0) {
-            $insert = 2;
-        }
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        // header("location: login.php");
     }
 
+    $check = $_SESSION['user_id'];
+    $sql2 = "SELECT name, address, pincode, state, contact_number, email FROM `path_lab` WHERE `user_id` = '$check';";
 
-    if ($result->num_rows == 0) {
-        $flag = 1;
-    } else if ($insert == 1) {
-        if ($password == $row["password"]) {
-            if ($reg_no != $row["reg_no"]) {
-                $flag = 2;
-            } else if ($reg_no == $row["reg_no"]) {
-                $flag = 3;
-                $con->query($sql1);
-                $_SESSION["name"] = $name;
+    if ($con->query($sql2) == true) {
+        $result2 = $con->query($sql2);
+        // $row2 = mysqli_fetch_array($result2);
+    }
+    $row2 = mysqli_fetch_array($result2);
+    $name2 = $row2['name'];
+    $address2 = $row2['address'];
+    $pincode2 = $row2['pincode'];
+    $state2 = $row2['state'];
+    $contact_number2 = $row2['contact_number'];
+    $email2 = $row2['email'];
+
+
+    if (isset($_POST['reg_no'])) {
+
+        $reg_no = $_POST['reg_no'];
+        $user_id = $_POST['user_id'];
+        $password = $_POST['password'];
+        $name = $_POST['name'];
+        $address = $_POST['address'];
+        $pincode = $_POST['pincode'];
+        $state = $_POST['state'];
+        $contact_number = $_POST['contact_number'];
+        $email = $_POST['email'];
+        $sql1 = "UPDATE `path_lab` SET `Name` = '$name', `Address` = '$address', `Pincode` = '$pincode', `Contact_Number` = '$contact_number', `Email` = '$email', `state`='$state' WHERE `Reg_no` = '$reg_no' AND `user_id` = '$user_id' AND `password`='$password';";
+        $sql = "SELECT password, reg_no FROM `path_lab` WHERE `user_id` = '$user_id';";
+
+        if ($con->query($sql) == true) {
+            $result = $con->query($sql);
+            $row = mysqli_fetch_array($result);
+            $insert = 1;
+            if (mysqli_affected_rows($con) == 0) {
+                $insert = 2;
             }
-        } else if ($insert == 1 && $password != $row["password"]) {
-            $flag = 4;
         }
+
+
+        if ($result->num_rows == 0) {
+            $flag = 1;
+        } else if ($insert == 1) {
+            if ($password == $row["password"]) {
+                if ($reg_no != $row["reg_no"]) {
+                    $flag = 2;
+                } else if ($reg_no == $row["reg_no"]) {
+                    $flag = 3;
+                    $con->query($sql1);
+                    $_SESSION["name"] = $name;
+                }
+            } else if ($insert == 1 && $password != $row["password"]) {
+                $flag = 4;
+            }
+        }
+        $con->close();
     }
-    $con->close();
-}
 } catch (Throwable $e) {
     $err = 1;
 }
@@ -99,13 +101,13 @@ if (isset($_POST['reg_no'])) {
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
-    if ($err == 1){
+    if ($err == 1) {
         echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     if ($flag == 1) {
         echo "<p align='center' class='alertMsg'>User Not Exist !!!</p>";
     } else if ($flag == 2) {
-        
+
         echo "<p align='center' class='alertMsg'>Wrong Registration Number !!!</p>";
     } else if ($flag == 3) {
         if ($insert == 1) {

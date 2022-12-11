@@ -1,34 +1,35 @@
 <?php
 $err = 0;
-try{
-$insert = 0;
-$result = 0;
-if (isset($_POST['area_pincode'])) {
-    $server = "localhost";
-    $username = "root";
-    $pass = "";
-
-    $con = mysqli_connect($server, $username, $pass);
-
-    if (!$con) {
-        die("connection to this database failed due to" . mysqli_connect_error());
-    }
-
-    $area_pincode = $_POST['area_pincode'];
+try {
     $insert = 0;
+    $result = 0;
+    if (isset($_POST['area_pincode'])) {
+        $server = "localhost";
+        $username = "root";
+        $pass = "";
+        $db = "dhamni";
 
-    $sql = "SELECT Name,contact_number,email from `dhamni`.`blood_bank` WHERE Pincode = '$area_pincode';";
+        $con = mysqli_connect($server, $username, $pass, $db);
 
-    if ($con->query($sql) == true) {
-        $insert = 1;
-        $result = $con->query($sql);
-    } else {
-        $insert = 2;
-        echo "ERROR: $sql <br> $con->error";
+        if (!$con) {
+            die("connection to this database failed due to" . mysqli_connect_error());
+        }
+
+        $area_pincode = $_POST['area_pincode'];
+        $insert = 0;
+
+        $sql = "SELECT Name,contact_number,email from `blood_bank` WHERE Pincode = '$area_pincode';";
+
+        if ($con->query($sql) == true) {
+            $insert = 1;
+            $result = $con->query($sql);
+        } else {
+            $insert = 2;
+            echo "ERROR: $sql <br> $con->error";
+        }
+
+        $con->close();
     }
-
-    $con->close();
-}
 } catch (Throwable $e) {
     $err = 1;
 }
@@ -54,7 +55,7 @@ if (isset($_POST['area_pincode'])) {
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
-    if ($err == 1){
+    if ($err == 1) {
         echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     ?>
@@ -71,12 +72,12 @@ if (isset($_POST['area_pincode'])) {
         </form>
     </div>
     <?php
-        if ($insert == 1) {
-            // output data of each row
-        
-            echo "<main style='width: 90%; margin: auto; text-align: center; position: relative; top: 500px;'>";
-            echo "<div style='text-align: center;'><p style='background-image: linear-gradient(to bottom, rgb(40, 8, 8),rgb(132, 4, 4)); border-radius:15px;color:white; display: inline-block; padding:3px 10px;font-size:1.5em;' disabled>Blood Banks</p></div>";
-            echo "<table class='table table-striped' >
+    if ($insert == 1) {
+        // output data of each row
+    
+        echo "<main style='width: 90%; margin: auto; text-align: center; position: relative; top: 500px;'>";
+        echo "<div style='text-align: center;'><p style='background-image: linear-gradient(to bottom, rgb(40, 8, 8),rgb(132, 4, 4)); border-radius:15px;color:white; display: inline-block; padding:3px 10px;font-size:1.5em;' disabled>Blood Banks</p></div>";
+        echo "<table class='table table-striped' >
             <thead style='color:antiquewhite;font-size:1.2em; font-family:Arial, Helvetica, sans-serif;border-radius: 5px; background-image: linear-gradient(to right, rgba(34, 57, 12,1), rgba(85, 10, 10,1));'>
                 <tr>
                 <th scope='col' style='width: 10%;margin: auto;text-align: center;'>S. No.</th>
@@ -86,23 +87,23 @@ if (isset($_POST['area_pincode'])) {
                 </tr>
             </thead>
             <tbody style='color:rgb(27, 25, 22); font-family: Arial, Helvetica, sans-serif;border-radius: 5px; background-image: linear-gradient(to right, rgba(163, 228, 150, 0.836), rgba(198, 172, 116, 0.795));''>";
-            $code = 1;
-            while ($row = mysqli_fetch_array($result)) {
+        $code = 1;
+        while ($row = mysqli_fetch_array($result)) {
 
-                echo "<tr>";
-                echo "<td style='width: 10%;margin: auto;text-align: center; font-weight: bold;'>$code</td>";
-                echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['Name'] . "</td>";
-                echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['contact_number'] . "</td>";
-                echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['email'] . "</td>";
-                echo "</tr>";
-                $code = $code + 1;
-            }
+            echo "<tr>";
+            echo "<td style='width: 10%;margin: auto;text-align: center; font-weight: bold;'>$code</td>";
+            echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['Name'] . "</td>";
+            echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['contact_number'] . "</td>";
+            echo "<td style='width: 30%;margin: auto;text-align: center; font-weight: bold;'>" . $row['email'] . "</td>";
+            echo "</tr>";
+            $code = $code + 1;
+        }
 
-            echo "
+        echo "
                 </tbody>
                 </table><br>";
-        }
-        ?>
+    }
+    ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>

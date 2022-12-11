@@ -1,51 +1,52 @@
 <?php
 $err = 0;
-try{
-$insert = 0;
-$flag = 0;
-$name = "a";
-if (isset($_POST['user_id'])) {
-    $server = "localhost";
-    $username = "root";
-    $pass = "";
+try {
+    $insert = 0;
+    $flag = 0;
+    $name = "a";
+    if (isset($_POST['user_id'])) {
+        $server = "localhost";
+        $username = "root";
+        $pass = "";
+        $db = "dhamni";
 
-    $con = mysqli_connect($server, $username, $pass);
+        $con = mysqli_connect($server, $username, $pass, $db);
 
-    if (!$con) {
-        die("connection to this database failed due to" . mysqli_connect_error());
-    }
-
-    $user_id = $_POST['user_id'];
-    $password = $_POST['password'];
-    $sql = "SELECT user_id, password, name FROM `dhamni`.`path_lab` WHERE user_id = '$user_id';";
-
-    if ($con->query($sql) == true) {
-        $result = $con->query($sql);
-        $row = mysqli_fetch_array($result);
-        $insert = 1;
-    } else {
-        $insert = 2;
-        echo "ERROR: $sql <br> $con->error";
-    }
-    $con->close();
-
-    if ($result->num_rows == 0) {
-        $flag = 1;
-    } else if ($insert == 1) {
-        if ($password == $row["password"]) {
-            session_start();
-            $name = $row['name'];
-            $_SESSION["name"] = $name;
-            $_SESSION["user_id"] = $user_id;
-            $_SESSION[""] = true;
-            header("Location: http://localhost/Dhamni_2.0/homepl.php");
-            exit();
-        } else if ($insert == 1 && $password != $row["password"]) {
-            $flag = 2;
+        if (!$con) {
+            die("connection to this database failed due to" . mysqli_connect_error());
         }
-    }
 
-}
+        $user_id = $_POST['user_id'];
+        $password = $_POST['password'];
+        $sql = "SELECT user_id, password, name FROM `path_lab` WHERE user_id = '$user_id';";
+
+        if ($con->query($sql) == true) {
+            $result = $con->query($sql);
+            $row = mysqli_fetch_array($result);
+            $insert = 1;
+        } else {
+            $insert = 2;
+            echo "ERROR: $sql <br> $con->error";
+        }
+        $con->close();
+
+        if ($result->num_rows == 0) {
+            $flag = 1;
+        } else if ($insert == 1) {
+            if ($password == $row["password"]) {
+                session_start();
+                $name = $row['name'];
+                $_SESSION["name"] = $name;
+                $_SESSION["user_id"] = $user_id;
+                $_SESSION[""] = true;
+                header("Location: http://localhost/Dhamni_2.0/homepl.php");
+                exit();
+            } else if ($insert == 1 && $password != $row["password"]) {
+                $flag = 2;
+            }
+        }
+
+    }
 } catch (Throwable $e) {
     $err = 1;
 }
@@ -70,7 +71,7 @@ if (isset($_POST['user_id'])) {
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
-    if ($err == 1){
+    if ($err == 1) {
         echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     if ($flag == 1) {

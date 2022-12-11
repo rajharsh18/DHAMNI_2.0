@@ -1,32 +1,33 @@
 <?php
 $err = 0;
-try{
-$insert = 0;
-if (isset($_POST['reg_no'])) {
-    $server = "localhost";
-    $username = "root";
-    $pass = "";
-
-    $con = mysqli_connect($server, $username, $pass);
-
-    if (!$con) {
-        die("connection to this database failed due to" . mysqli_connect_error());
-    }
-
-    $reg_no = $_POST['reg_no'];
-    $blood_group = $_POST['blood_group'];
-    $quantity = $_POST['quantity'];
-    $sql = "UPDATE `dhamni`.`blood` SET `Quantity` = '$quantity' WHERE `Blood_bank_id` LIKE '$reg_no' AND `Blood_group` LIKE '$blood_group';";
+try {
     $insert = 0;
+    if (isset($_POST['reg_no'])) {
+        $server = "localhost";
+        $username = "root";
+        $pass = "";
+        $db = "dhamni";
 
-    if ($con->query($sql) == true) {
-        $insert = 1;
-        if (mysqli_affected_rows($con) == 0) {
-            $insert = 2;
+        $con = mysqli_connect($server, $username, $pass, $db);
+
+        if (!$con) {
+            die("connection to this database failed due to" . mysqli_connect_error());
         }
+
+        $reg_no = $_POST['reg_no'];
+        $blood_group = $_POST['blood_group'];
+        $quantity = $_POST['quantity'];
+        $sql = "UPDATE `blood` SET `Quantity` = '$quantity' WHERE `Blood_bank_id` LIKE '$reg_no' AND `Blood_group` LIKE '$blood_group';";
+        $insert = 0;
+
+        if ($con->query($sql) == true) {
+            $insert = 1;
+            if (mysqli_affected_rows($con) == 0) {
+                $insert = 2;
+            }
+        }
+        $con->close();
     }
-    $con->close();
-}
 } catch (Throwable $e) {
     $err = 1;
 }
@@ -46,12 +47,12 @@ if (isset($_POST['reg_no'])) {
 </head>
 
 <body style="height: 700px;">
-    
+
     <a href="http://localhost/Dhamni_2.0/homebb.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
-    if ($err == 1){
+    if ($err == 1) {
         echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     if ($insert == 1) {

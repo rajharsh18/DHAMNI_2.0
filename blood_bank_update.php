@@ -1,79 +1,81 @@
 <?php
 $err = 0;
-try{
-$insert = 0;
-$flag = 0;
-$result2 = 0;
+try {
+    $insert = 0;
+    $flag = 0;
+    $result2 = 0;
 
-$server = "localhost";
-$username = "root";
-$pass = "";
-$con = mysqli_connect($server, $username, $pass);
-if (!$con) {
-    die("connection to this database failed due to" . mysqli_connect_error());
-}
-session_start();
+    $server = "localhost";
+    $username = "root";
+    $pass = "";
+    $db = "dhamni";
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // header("location: login.php");
-}
+    $con = mysqli_connect($server, $username, $pass, $db);
+    if (!$con) {
+        die("connection to this database failed due to" . mysqli_connect_error());
+    }
+    session_start();
 
-$check = $_SESSION['user_id'];
-$sql2 = "SELECT name, address, pincode, state, contact_number, email FROM `dhamni`.`blood_bank` WHERE `user_id` = '$check';";
-
-if ($con->query($sql2) == true) {
-    $result2 = $con->query($sql2);
-    // $row2 = mysqli_fetch_array($result2);
-}
-$row2 = mysqli_fetch_array($result2);
-$name2 = $row2['name'];
-$address2 = $row2['address'];
-$pincode2 = $row2['pincode'];
-$state2 = $row2['state'];
-$contact_number2 = $row2['contact_number'];
-$email2 = $row2['email'];
-
-
-if (isset($_POST['reg_no'])) {
-
-    $reg_no = $_POST['reg_no'];
-    $user_id = $_POST['user_id'];
-    $password = $_POST['password'];
-    $name = $_POST['name'];
-    $address = $_POST['address'];
-    $pincode = $_POST['pincode'];
-    $state = $_POST['state'];
-    $contact_number = $_POST['contact_number'];
-    $email = $_POST['email'];
-    $sql1 = "UPDATE `dhamni`.`blood_bank` SET `Name` = '$name', `Address` = '$address', `Pincode` = '$pincode', `Contact_Number` = '$contact_number', `Email` = '$email', `state`='$state' WHERE `Reg_no` = '$reg_no' AND `user_id` = '$user_id' AND `password`='$password';";
-    $sql = "SELECT password, reg_no FROM `dhamni`.`blood_bank` WHERE `user_id` = '$user_id';";
-
-    if ($con->query($sql) == true) {
-        $result = $con->query($sql);
-        $row = mysqli_fetch_array($result);
-        $insert = 1;
-        if (mysqli_affected_rows($con) == 0) {
-            $insert = 2;
-        }
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        // header("location: login.php");
     }
 
-    if ($result->num_rows == 0) {
-        $flag = 1;
-    } else if ($insert == 1) {
-        if ($password == $row["password"]) {
-            if ($reg_no != $row["reg_no"]) {
-                $flag = 2;
-            } else if ($reg_no == $row["reg_no"]) {
-                $flag = 3;
-                $con->query($sql1);
-                $_SESSION["name"] = $name;
+    $check = $_SESSION['user_id'];
+    $sql2 = "SELECT name, address, pincode, state, contact_number, email FROM `blood_bank` WHERE `user_id` = '$check';";
+
+    if ($con->query($sql2) == true) {
+        $result2 = $con->query($sql2);
+        // $row2 = mysqli_fetch_array($result2);
+    }
+    $row2 = mysqli_fetch_array($result2);
+    $name2 = $row2['name'];
+    $address2 = $row2['address'];
+    $pincode2 = $row2['pincode'];
+    $state2 = $row2['state'];
+    $contact_number2 = $row2['contact_number'];
+    $email2 = $row2['email'];
+
+
+    if (isset($_POST['reg_no'])) {
+
+        $reg_no = $_POST['reg_no'];
+        $user_id = $_POST['user_id'];
+        $password = $_POST['password'];
+        $name = $_POST['name'];
+        $address = $_POST['address'];
+        $pincode = $_POST['pincode'];
+        $state = $_POST['state'];
+        $contact_number = $_POST['contact_number'];
+        $email = $_POST['email'];
+        $sql1 = "UPDATE `blood_bank` SET `Name` = '$name', `Address` = '$address', `Pincode` = '$pincode', `Contact_Number` = '$contact_number', `Email` = '$email', `state`='$state' WHERE `Reg_no` = '$reg_no' AND `user_id` = '$user_id' AND `password`='$password';";
+        $sql = "SELECT password, reg_no FROM `blood_bank` WHERE `user_id` = '$user_id';";
+
+        if ($con->query($sql) == true) {
+            $result = $con->query($sql);
+            $row = mysqli_fetch_array($result);
+            $insert = 1;
+            if (mysqli_affected_rows($con) == 0) {
+                $insert = 2;
             }
-        } else if ($insert == 1 && $password != $row["password"]) {
-            $flag = 4;
         }
+
+        if ($result->num_rows == 0) {
+            $flag = 1;
+        } else if ($insert == 1) {
+            if ($password == $row["password"]) {
+                if ($reg_no != $row["reg_no"]) {
+                    $flag = 2;
+                } else if ($reg_no == $row["reg_no"]) {
+                    $flag = 3;
+                    $con->query($sql1);
+                    $_SESSION["name"] = $name;
+                }
+            } else if ($insert == 1 && $password != $row["password"]) {
+                $flag = 4;
+            }
+        }
+        $con->close();
     }
-    $con->close();
-}
 } catch (Throwable $e) {
     $err = 1;
 }
@@ -98,13 +100,13 @@ if (isset($_POST['reg_no'])) {
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
-    if ($err == 1){
+    if ($err == 1) {
         echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     if ($flag == 1) {
         echo "<p align='center' class='alertMsg'>User Not Exist !!!</p>";
     } else if ($flag == 2) {
-        
+
         echo "<p align='center' class='alertMsg'>Wrong Registration Number !!!</p>";
     } else if ($flag == 3) {
         if ($insert == 1) {
@@ -116,7 +118,7 @@ if (isset($_POST['reg_no'])) {
         echo "<p align='center' class='alertMsg'>Wrong Password !!!</p>";
     }
     ?>
-    
+
     <div class="card">
         <form action="blood_bank_update.php" class="box" method="post">
             <h1>Update Blood Bank Details</h1>
@@ -131,17 +133,23 @@ if (isset($_POST['reg_no'])) {
             </div>
             <div>
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="name"
-                    class="form-control" id="inputName" placeholder="Name of Path Lab" value="<?php echo "$name2"?>" required>
+                    class="form-control" id="inputName" placeholder="Name of Path Lab" value="<?php echo "$name2" ?>"
+                    required>
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="number" name="contact_number"
-                    class="form-control" id="inputContact1" placeholder="Contact Number" value="<?php echo "$contact_number2"?>" required>
+                    class="form-control" id="inputContact1" placeholder="Contact Number"
+                    value="<?php echo "$contact_number2" ?>" required>
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="email" name="email"
-                    class="form-control" id="inputEmail1" placeholder="Email" value="<?php echo "$email2"?>">
+                    class="form-control" id="inputEmail1" placeholder="Email" value="<?php echo "$email2" ?>">
             </div>
-            <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address" value="<?php echo "$address2"?>" required>
+            <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address"
+                value="<?php echo "$address2" ?>" required>
             <div>
-                <input type="number" name="pincode" class="form-control" id="inputPin" placeholder="Pin Code" value="<?php echo "$pincode2"?>" required>
+                <input type="number" name="pincode" class="form-control" id="inputPin" placeholder="Pin Code"
+                    value="<?php echo "$pincode2" ?>" required>
                 <select id="inputState" name="state" class="form-select" required>
-                    <option selected><?php echo "$state2"?></option>
+                    <option selected>
+                        <?php echo "$state2" ?>
+                    </option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                     <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>

@@ -1,32 +1,33 @@
 <?php
 $err = 0;
-try{
-$insert = 0;
-if (isset($_POST['path_lab_id'])) {
-    $server = "localhost";
-    $username = "root";
-    $pass = "";
-
-    $con = mysqli_connect($server, $username, $pass);
-
-    if (!$con) {
-        die("connection to this database failed due to" . mysqli_connect_error());
-    }
-
-    $path_lab_id = $_POST['path_lab_id'];
-    $donor_id = $_POST['donor_id'];
-    $doe = $_POST['doe'];
-    $sql = "INSERT INTO `dhamni`.`examines` (`Path_lab_id`, `Donor_id`, `Date_of_examination`) VALUES ('$path_lab_id', '$donor_id', '$doe');";
+try {
     $insert = 0;
+    if (isset($_POST['path_lab_id'])) {
+        $server = "localhost";
+        $username = "root";
+        $pass = "";
+        $db = "dhamni";
 
-    if ($con->query($sql) == true) {
-        $insert = 1;
-        if (mysqli_affected_rows($con) == 0) {
-            $insert = 2;
+        $con = mysqli_connect($server, $username, $pass, $db);
+
+        if (!$con) {
+            die("connection to this database failed due to" . mysqli_connect_error());
         }
+
+        $path_lab_id = $_POST['path_lab_id'];
+        $donor_id = $_POST['donor_id'];
+        $doe = $_POST['doe'];
+        $sql = "INSERT INTO `examines` (`Path_lab_id`, `Donor_id`, `Date_of_examination`) VALUES ('$path_lab_id', '$donor_id', '$doe');";
+        $insert = 0;
+
+        if ($con->query($sql) == true) {
+            $insert = 1;
+            if (mysqli_affected_rows($con) == 0) {
+                $insert = 2;
+            }
+        }
+        $con->close();
     }
-    $con->close();
-}
 } catch (Throwable $e) {
     $err = 1;
 }
@@ -46,12 +47,12 @@ if (isset($_POST['path_lab_id'])) {
 </head>
 
 <body style="overflow-x: hidden;">
-    
+
     <a href="http://localhost/Dhamni_2.0/homepl.php">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
-    if ($err == 1){
+    if ($err == 1) {
         echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     if ($insert == 1) {

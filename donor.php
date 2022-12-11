@@ -1,43 +1,45 @@
 <?php
 $err = 0;
-try{
-$insert = false;
-if (isset($_POST['fname'])) {
-    $server = "localhost";
-    $username = "root";
-    $pass = "";
-    $con = mysqli_connect($server, $username, $pass);
+try {
+    $insert = false;
+    if (isset($_POST['fname'])) {
+        $server = "localhost";
+        $username = "root";
+        $pass = "";
+        $db = "dhamni";
 
-    if (!$con) {
-        die("connection to this database failed due to" . mysqli_connect_error());
+        $con = mysqli_connect($server, $username, $pass, $db);
+
+        if (!$con) {
+            die("connection to this database failed due to" . mysqli_connect_error());
+        }
+
+        $fname = $_POST['fname'];
+        $mname = $_POST['mname'];
+        $lname = $_POST['lname'];
+        $unique_id = $_POST['unique_id'];
+        $bdate = $_POST['bdate'];
+        $sex = $_POST['sex'];
+        $contact_number = $_POST['contact_number'];
+        $email = $_POST['email'];
+        $address = $_POST['address'];
+        $pincode = $_POST['pincode'];
+        $state = $_POST['state'];
+        $blood_group = $_POST['blood_group'];
+        $weight = $_POST['weight'];
+        $iron_content = $_POST['iron_content'];
+        $high_blood_pressure = $_POST['high_blood_pressure'];
+        $low_blood_pressure = $_POST['low_blood_pressure'];
+        $haemoglobin = $_POST['haemoglobin'];
+
+        $sql = "INSERT INTO `dhamni`.`donor` (`Fname`, `Mname`, `Lname`, `Unique_id`, `Bdate`, `Sex`, `Contact_Number`, `Email`, `Address`, `Pincode`, `State`, `Blood_group`, `Weight`, `Iron_content`, `High_blood_pressure`, `Low_blood_pressure`, `Haemoglobin`) VALUES ('$fname', '$mname', '$lname', '$unique_id', '$bdate', '$sex', '$contact_number', '$email', '$address', '$pincode', '$state', '$blood_group', '$weight', '$iron_content', '$high_blood_pressure', '$low_blood_pressure', '$haemoglobin');";
+
+        if ($con->query($sql) == true) {
+            $insert = true;
+        }
+
+        $con->close();
     }
-
-    $fname = $_POST['fname'];
-    $mname = $_POST['mname'];
-    $lname = $_POST['lname'];
-    $unique_id = $_POST['unique_id'];
-    $bdate = $_POST['bdate'];
-    $sex = $_POST['sex'];
-    $contact_number = $_POST['contact_number'];
-    $email = $_POST['email'];
-    $address = $_POST['address'];
-    $pincode = $_POST['pincode'];
-    $state = $_POST['state'];
-    $blood_group = $_POST['blood_group'];
-    $weight = $_POST['weight'];
-    $iron_content = $_POST['iron_content'];
-    $high_blood_pressure = $_POST['high_blood_pressure'];
-    $low_blood_pressure = $_POST['low_blood_pressure'];
-    $haemoglobin = $_POST['haemoglobin'];
-
-    $sql = "INSERT INTO `dhamni`.`donor` (`Fname`, `Mname`, `Lname`, `Unique_id`, `Bdate`, `Sex`, `Contact_Number`, `Email`, `Address`, `Pincode`, `State`, `Blood_group`, `Weight`, `Iron_content`, `High_blood_pressure`, `Low_blood_pressure`, `Haemoglobin`) VALUES ('$fname', '$mname', '$lname', '$unique_id', '$bdate', '$sex', '$contact_number', '$email', '$address', '$pincode', '$state', '$blood_group', '$weight', '$iron_content', '$high_blood_pressure', '$low_blood_pressure', '$haemoglobin');";
-
-    if ($con->query($sql) == true) {
-        $insert = true;
-    }
-
-    $con->close();
-}
 
 } catch (Throwable $e) {
     $err = 1;
@@ -58,12 +60,12 @@ if (isset($_POST['fname'])) {
 </head>
 
 <body style="height: 1070px;">
-    
+
     <a href="http://localhost/Dhamni_2.0/index.html">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
-    if ($err == 1){
+    if ($err == 1) {
         echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     if ($insert == true) {

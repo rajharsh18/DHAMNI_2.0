@@ -1,49 +1,50 @@
 <?php
 $err = 0;
-try{
-$insert = 0;
-$flag = 0;
-$name = 'a';
-if (isset($_POST['contact_number'])) {
-    $server = "localhost";
-    $username = "root";
-    $pass = "";
+try {
+    $insert = 0;
+    $flag = 0;
+    $name = 'a';
+    if (isset($_POST['contact_number'])) {
+        $server = "localhost";
+        $username = "root";
+        $pass = "";
+        $db = "dhamni";
 
-    $con = mysqli_connect($server, $username, $pass);
+        $con = mysqli_connect($server, $username, $pass, $db);
 
-    if (!$con) {
-        die("connection to this database failed due to" . mysqli_connect_error());
-    }
-
-    $contact_number = $_POST['contact_number'];
-    $password = $_POST['password'];
-    $sql = "SELECT contact_number, password, fname, mname, lname FROM `dhamni`.`recipient` WHERE contact_number = '$contact_number';";
-
-    if ($con->query($sql) == true) {
-        $result = $con->query($sql);
-        $row = mysqli_fetch_array($result);
-        $insert = 1;
-    } else {
-        $insert = 2;
-    }
-    $con->close();
-    if ($result->num_rows == 0) {
-        $flag = 1;
-    } else if ($insert == 1) {
-        if ($password == $row["password"]) {
-            $name = $row['fname']." ".$row['mname']." ".$row['lname'];
-            session_start();
-            $_SESSION["name"] = $name;
-            $_SESSION["contact_number"] = $contact_number;
-            $_SESSION[""] = true;
-            header("Location: http://localhost/Dhamni_2.0/homer.php");
-            exit();
-        } else if ($insert == 1 && $password != $row["password"]) {
-            $flag = 2;
+        if (!$con) {
+            die("connection to this database failed due to" . mysqli_connect_error());
         }
-    }
 
-}
+        $contact_number = $_POST['contact_number'];
+        $password = $_POST['password'];
+        $sql = "SELECT contact_number, password, fname, mname, lname FROM `recipient` WHERE contact_number = '$contact_number';";
+
+        if ($con->query($sql) == true) {
+            $result = $con->query($sql);
+            $row = mysqli_fetch_array($result);
+            $insert = 1;
+        } else {
+            $insert = 2;
+        }
+        $con->close();
+        if ($result->num_rows == 0) {
+            $flag = 1;
+        } else if ($insert == 1) {
+            if ($password == $row["password"]) {
+                $name = $row['fname'] . " " . $row['mname'] . " " . $row['lname'];
+                session_start();
+                $_SESSION["name"] = $name;
+                $_SESSION["contact_number"] = $contact_number;
+                $_SESSION[""] = true;
+                header("Location: http://localhost/Dhamni_2.0/homer.php");
+                exit();
+            } else if ($insert == 1 && $password != $row["password"]) {
+                $flag = 2;
+            }
+        }
+
+    }
 } catch (Throwable $e) {
     $err = 1;
 }
@@ -63,12 +64,12 @@ if (isset($_POST['contact_number'])) {
 </head>
 
 <body>
-    
+
     <a href="http://localhost/Dhamni_2.0/index.html">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
-    if ($err == 1){
+    if ($err == 1) {
         echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     if ($flag == 1) {

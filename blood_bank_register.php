@@ -1,40 +1,41 @@
 <?php
 $err = 0;
-try{
-$insert = 0;
-if (isset($_POST['reg_no'])) {
-    $server = "localhost";
-    $username = "root";
-    $pass = "";
+try {
+    $insert = 0;
+    if (isset($_POST['reg_no'])) {
+        $server = "localhost";
+        $username = "root";
+        $pass = "";
+        $db = "dhamni";
 
-    $con = mysqli_connect($server, $username, $pass);
-    if (!$con) {
-        die("connection to this database failed due to" . mysqli_connect_error());
+        $con = mysqli_connect($server, $username, $pass, $db);
+        if (!$con) {
+            die("connection to this database failed due to" . mysqli_connect_error());
+        }
+
+        $reg_no = $_POST['reg_no'];
+        $user_id = $_POST['user_id'];
+        $password = $_POST['password'];
+        $name = $_POST['name'];
+        $address = $_POST['address'];
+        $pincode = $_POST['pincode'];
+        $state = $_POST['state'];
+        $contact_number = $_POST['contact_number'];
+        $email = $_POST['email'];
+        $sql = "INSERT INTO `blood_bank` (`reg_no`, `user_id`, `password`, `name`, `address`, `pincode`,`state`, `contact_number`, `email`) VALUES ('$reg_no', '$user_id', '$password', '$name', '$address', '$pincode','$state' , '$contact_number', '$email')";
+        $sql2 = "INSERT INTO `blood` (`Blood_bank_id`, `Blood_group`, `Quantity`) VALUES ('$reg_no', 'A +', '0'), ('$reg_no', 'A -', '0'), ('$reg_no', 'B +', '0'), ('$reg_no', 'B -', '0'), ('$reg_no', 'AB +', '0'), ('$reg_no', 'AB -', '0'), ('$reg_no', 'O +', '0'), ('$reg_no', 'O -', '0');";
+
+        if ($con->query($sql) == true) {
+            $result = $con->query($sql2);
+            $insert = 1;
+        }
+        $con->close();
+
+        if ($insert == 1) {
+            header("Location: http://localhost/Dhamni_2.0/blood_bank_login.php");
+            exit();
+        }
     }
-
-    $reg_no = $_POST['reg_no'];
-    $user_id = $_POST['user_id'];
-    $password = $_POST['password'];
-    $name = $_POST['name'];
-    $address = $_POST['address'];
-    $pincode = $_POST['pincode'];
-    $state = $_POST['state'];
-    $contact_number = $_POST['contact_number'];
-    $email = $_POST['email'];
-    $sql = "INSERT INTO `dhamni`.`blood_bank` (`reg_no`, `user_id`, `password`, `name`, `address`, `pincode`,`state`, `contact_number`, `email`) VALUES ('$reg_no', '$user_id', '$password', '$name', '$address', '$pincode','$state' , '$contact_number', '$email')";
-    $sql2 = "INSERT INTO `dhamni`.`blood` (`Blood_bank_id`, `Blood_group`, `Quantity`) VALUES ('$reg_no', 'A +', '0'), ('$reg_no', 'A -', '0'), ('$reg_no', 'B +', '0'), ('$reg_no', 'B -', '0'), ('$reg_no', 'AB +', '0'), ('$reg_no', 'AB -', '0'), ('$reg_no', 'O +', '0'), ('$reg_no', 'O -', '0');";
-
-    if ($con->query($sql) == true) {
-        $result = $con->query($sql2);
-        $insert = 1;
-    }
-    $con->close();
-
-    if ($insert == 1) {
-        header("Location: http://localhost/Dhamni_2.0/blood_bank_login.php");
-        exit();
-    }
-}
 } catch (Throwable $e) {
     $err = 1;
 }
@@ -54,12 +55,12 @@ if (isset($_POST['reg_no'])) {
 </head>
 
 <body style="height: 840px;">
-    
+
     <a href="http://localhost/Dhamni_2.0/index.html">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
-    if ($err == 1){
+    if ($err == 1) {
         echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     ?>
@@ -68,16 +69,22 @@ if (isset($_POST['reg_no'])) {
             <h1>Blood Bank Registration</h1>
             <p class="text-muted"> Please enter your details here</p>
             <div>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="user_id" class="form-control" id="inputUserId" placeholder="User ID" required>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" required>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="reg_no" class="form-control" id="inputReg" placeholder="Registration Number" required>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="user_id"
+                    class="form-control" id="inputUserId" placeholder="User ID" required>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="password" name="password"
+                    class="form-control" id="inputPassword" placeholder="Password" required>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="reg_no"
+                    class="form-control" id="inputReg" placeholder="Registration Number" required>
             </div>
             <div>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="name" class="form-control" id="inputName" placeholder="Name of Path Lab" required>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="number" name="contact_number" class="form-control" id="inputContact1" placeholder="Contact Number" required>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="email" name="email" class="form-control" id="inputEmail1" placeholder="Email" >
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="name"
+                    class="form-control" id="inputName" placeholder="Name of Path Lab" required>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="number" name="contact_number"
+                    class="form-control" id="inputContact1" placeholder="Contact Number" required>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="email" name="email"
+                    class="form-control" id="inputEmail1" placeholder="Email">
             </div>
-            <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address" required >
+            <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address" required>
             <div>
                 <input type="number" name="pincode" class="form-control" id="inputPin" placeholder="Pin Code" required>
                 <select id="inputState" name="state" class="form-select" required>

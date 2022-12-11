@@ -1,47 +1,46 @@
-
 <?php
 $err = 0;
-try{
-$insert = 0;
-if(isset($_POST['fname'])){
-    $server = "localhost";
-    $username = "root";
-    $pass = "";
+try {
+    $insert = 0;
+    if (isset($_POST['fname'])) {
+        $server = "localhost";
+        $username = "root";
+        $pass = "";
+        $db = "dhamni";
 
-    $con = mysqli_connect($server, $username, $pass);
-    if(!$con){
-        die("connection to this database failed due to" . mysqli_connect_error());
-    }
+        $con = mysqli_connect($server, $username, $pass, $db);
+        if (!$con) {
+            die("connection to this database failed due to" . mysqli_connect_error());
+        }
 
-    $fname = $_POST['fname'];
-    $mname = $_POST['mname'];
-    $lname = $_POST['lname'];
-    $unique_id = $_POST['unique_id'];
-    $bdate = $_POST['bdate'];
-    $sex = $_POST['sex'];
-    $contact_number = $_POST['contact_number'];
-    $password = $_POST['password'];
-    $email = $_POST['email'];
-    $address = $_POST['address'];
-    $pincode = $_POST['pincode'];
-    $state = $_POST['state'];
-    
-    $sql = "INSERT INTO `dhamni`.`recipient` (`Fname`, `Mname`, `Lname`, `Unique_id`, `Bdate`, `Sex`, `Contact_Number`, `Email`, `Address`, `Pincode`, `State`, `password`) VALUES ('$fname', '$mname', '$lname', '$unique_id', '$bdate', '$sex', '$contact_number', '$email', '$address', '$pincode', '$state','$password');";
+        $fname = $_POST['fname'];
+        $mname = $_POST['mname'];
+        $lname = $_POST['lname'];
+        $unique_id = $_POST['unique_id'];
+        $bdate = $_POST['bdate'];
+        $sex = $_POST['sex'];
+        $contact_number = $_POST['contact_number'];
+        $password = $_POST['password'];
+        $email = $_POST['email'];
+        $address = $_POST['address'];
+        $pincode = $_POST['pincode'];
+        $state = $_POST['state'];
 
-    if($con->query($sql) == 1){
-        $insert = 1;
-    }
-    else{
-        $insert=2;
-        echo "ERROR: $sql <br> $con->error";
-    }
-    $con->close();
+        $sql = "INSERT INTO `recipient` (`Fname`, `Mname`, `Lname`, `Unique_id`, `Bdate`, `Sex`, `Contact_Number`, `Email`, `Address`, `Pincode`, `State`, `password`) VALUES ('$fname', '$mname', '$lname', '$unique_id', '$bdate', '$sex', '$contact_number', '$email', '$address', '$pincode', '$state','$password');";
 
-    if ($insert == 1){
-        header("Location: http://localhost/Dhamni_2.0/recipient_login.php");
-        exit();
+        if ($con->query($sql) == 1) {
+            $insert = 1;
+        } else {
+            $insert = 2;
+            echo "ERROR: $sql <br> $con->error";
+        }
+        $con->close();
+
+        if ($insert == 1) {
+            header("Location: http://localhost/Dhamni_2.0/recipient_login.php");
+            exit();
+        }
     }
-}
 } catch (Throwable $e) {
     $err = 1;
 }
@@ -61,11 +60,11 @@ if(isset($_POST['fname'])){
 </head>
 
 <body style="height:930px;">
-<a href="http://localhost/Dhamni_2.0/index.html">
+    <a href="http://localhost/Dhamni_2.0/index.html">
         <img src="home.png" alt="home" style="width: 3.5%;" id="home">
     </a>
     <?php
-    if ($err == 1){
+    if ($err == 1) {
         echo "<p align='center' class='alertMsg'>Unexpected Error Occured</p>";
     }
     ?>
@@ -95,10 +94,12 @@ if(isset($_POST['fname'])){
                 </select>
             </div>
             <div>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="number" name="contact_number" class="form-control" id="inputContact2"
-                    placeholder="Contact Number" required>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="email" name="email" class="form-control" id="inputEmail2" placeholder="Email">
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="password" name="password" class="form-control" id="inputPassword2" placeholder="Password" required>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="number" name="contact_number"
+                    class="form-control" id="inputContact2" placeholder="Contact Number" required>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="email" name="email"
+                    class="form-control" id="inputEmail2" placeholder="Email">
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="password" name="password"
+                    class="form-control" id="inputPassword2" placeholder="Password" required>
             </div>
             <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address" required>
             <div>

@@ -87,8 +87,8 @@ try {
             <div>
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="unique_id"
                     class="form-control" id="inputID" placeholder="Unique ID" required>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="date" name="bdate"
-                    class="form-control" id="inputBdate" placeholder="Birth Date" required>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="bdate"
+                    class="form-control" id="inputBdate" placeholder="Birth Date" onfocus="(this.type = 'date')" onblur="(this.type = 'text')" required>
                 <select style="display: inline;margin-left: 3%;margin-right:3%;" id="inputSex" name="sex"
                     class="form-select" required>
                     <option selected>Select Gender</option>
@@ -170,7 +170,7 @@ try {
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="low_blood_pressure"
                     class="form-control" id="inputLBPressure" placeholder="Low BP (mmhg)">
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="haemoglobin"
-                    class="form-control" id="inputHaemoglobin" placeholder="Haemoglobin (g/dL)">
+                    class="form-control" id="inputHaemoglobin" placeholder="Hemoglobin (g/dL)">
             </div>
             <button type="submit" class="btn-submit">Register</button>
             <!-- <label class="form-label" style="color: antiquewhite">Already an user?

@@ -83,8 +83,8 @@ try {
             <div>
                 <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="unique_id"
                     class="form-control" id="inputID" placeholder="Unique ID" required>
-                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="date" name="bdate"
-                    class="form-control" id="inputBdate" placeholder="Birth Date" required>
+                <input style="display: inline;margin-left: 3%;margin-right:3%;" type="text" name="bdate"
+                    class="form-control" id="inputBdate" placeholder="Birth Date" onfocus="(this.type = 'date')" onblur="(this.type = 'text')" required>
                 <select style="display: inline;margin-left: 3%;margin-right:3%;" id="inputSex" name="sex"
                     class="form-select" required>
                     <option selected>Select Gender</option>

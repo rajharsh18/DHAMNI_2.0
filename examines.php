@@ -69,7 +69,7 @@ try {
             <input type="text" name="donor_id" class="form-control" id="inputReg" placeholder="Donor ID" required>
             <input
                 style="border: 0;background: none;display: block;margin: 20px auto;text-align: center;border: 2px solid #3498db;padding: 10px 10px;width: 250px;outline: none;color: rgb(148, 163, 165);border-radius: 24px;transition: 0.25s"
-                type="date" name="doe" class="form-control" id="inputReg" required>
+                type="text" name="doe" class="form-control" id="inputReg" placeholder="Date of Examination" onfocus="(this.type = 'date')" onblur="(this.type = 'text')" required>
             <button type="submit" class="btn-submit">Update</button>
         </form>
     </div>
